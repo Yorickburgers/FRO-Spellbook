@@ -1,0 +1,88 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    background-color: rebeccapurple;
+    width: 100%;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.outer-nav-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    justify-content: start;
+    background-color: rebeccapurple;
+}
+
+.input-container,
+.navLink {
+    background-color: rebeccapurple;
+}
+
+/* ----------------- Links ----------------- */
+
+.navLink,
+.navLink:hover,
+.navLink:visited,
+.button,
+.button:hover,
+.button:visited {
+    padding: 10px;
+    text-decoration: none;
+    color: orange;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: mistyrose
+}
+
+.button:active {
+    background-color: mistyrose;
+    color: orange;
+}
+
+
+/* ------------------ Logo ------------------- */
+.logo-wrapper,
+.logo-wrapper a,
+.logo-wrapper a img {
+    height: 100%;
+    width: auto;
+    text-decoration: none;
+    background-color: rebeccapurple;
+}
+
+.logo-wrapper a {
+    display: flex;
+    flex-direction: row;
+}
+
+.logoName,
+.logoName:hover,
+.logoName:visited {
+    text-decoration: none;
+    color: orange;
+    margin-right: 10px;
+    margin-left: 10px;
+    align-self: center;
+    background-color: rebeccapurple;
+}
+
+/* ------------------- Inputs --------------- */
+
+.accountInput {
+    padding: 5px;
+    border-radius: 12px;
+    border: solid 1px transparent;
+    margin: 5px;
+    background-color: mistyrose;
+}
+
+.accountInput:focus {
+    border: solid 1px orange;
+    outline: none;
+}

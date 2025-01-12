@@ -1,0 +1,8 @@
+.button {
+    border-radius: 20px;
+    color: white;
+    background-color: deeppink;
+    padding: 10px;
+    border: none;
+    margin-left: 10px;
+}
