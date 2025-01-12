@@ -23,13 +23,33 @@ return (
         </div>
         <div className="outer-container">
             <article className="function-box">
-
+                <h2>Spell list</h2>
+                <p>See a complete list of all spells available in DnD 5.5e. Filter for class, damage type or other
+                    criteria and see all spells that meet your criteria. Click on any spell to see its details.</p>
+                <Button
+                    text="All spells"
+                    link="/spells"
+                />
             </article>
             <article className="function-box">
-
+                <h2>Search a spell</h2>
+                <p>Have you read about an amazing new spell, or is someone at your table casting a spell that you forgot
+                    the details about? Look for it here by typing the spell name or a keyword.</p>
+                <div><input placeholder='for example "wish"' className="accountInput" type="text"
+                            name="searchTerm"/>
+                    <Button
+                        text="Zoek"
+                        link="/spells"
+                    /></div>
             </article>
             <article className="function-box">
-
+                <h2>Favourites</h2>
+                <p>When browsing the complete spell list and specific spells, you can add spells that you like to your
+                    favourites list by pressing the star. Click here to see a list of your favourite spells.</p>
+                <Button
+                    text="Favourites"
+                    link="/favourites"
+                />
             </article>
         </div>
     </div>
