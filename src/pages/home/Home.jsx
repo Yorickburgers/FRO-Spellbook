@@ -9,12 +9,13 @@ return (
             </span>
             <div className="inner-container">
                 <h1>Welcome to Spellbook!</h1>
-                <p>intro
+                <p>Spellbook is an application that enables you to look up spells for your Dungeons & Dragons
+                    character. You can use it to:
                     <ul>
-                        <li>function1</li>
-                        <li>function2</li>
-                        <li>function3</li>
-                        <li>function4</li>
+                        <li>Look up every spell available.</li>
+                        <li>Filter for class or damage type.</li>
+                        <li>Search for a specific spell.</li>
+                        <li>Save your favourites for future reference.</li>
                     </ul>
                     Please read the descriptions below for more details and get started!
                 </p>
