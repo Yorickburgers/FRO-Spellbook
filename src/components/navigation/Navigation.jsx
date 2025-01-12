@@ -1,6 +1,7 @@
 import './Navigation.css';
 import logo from "../../../public/vite.svg"
 import {NavLink} from "react-router-dom";
+import Button from "../button/Button.jsx";
 
 function Navigation() {
 return (
@@ -18,18 +19,20 @@ return (
             <NavLink className="navLink" to="/spells">All spells</NavLink>
             <NavLink className="navLink" to="/favourites">Favourites</NavLink>
             <input placeholder='for example "wish"' type="text" name="searchTerm"/>
-            <button
-                type="button"
-            >zoek </button>
+            <Button
+                text="Zoek"
+                link="/spells"
+            />
         </div>
         <div className="outer-nav-container">
             <div className="input-container">
                 <input type="text" name="userName" placeholder="Username"/>
                 <input type="text" name="password" placeholder="Password"/>
             </div>
-            <button
-                type="text"
-            >login</button>
+            <Button
+                text="Login"
+                link="/"
+            />
         </div>
     </nav>
 );
