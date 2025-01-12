@@ -1,11 +1,13 @@
 import './Home.css';
 import Button from "../../components/button/Button.jsx";
+import logo from "../../assets/spellbook-logo.png";
 
 function Home() {
 return (
     <div className="page-container">
         <div className="outer-container">
             <span className="logo-wrapper-large">
+                <img src={logo} alt="spellbook logo"/>
             </span>
             <div className="inner-container">
                 <h1>Welcome to Spellbook!</h1>
