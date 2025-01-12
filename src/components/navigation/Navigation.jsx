@@ -1,7 +1,7 @@
 import './Navigation.css';
 import logo from "../../../public/vite.svg"
 
-function Navigation({}) {
+function Navigation() {
 return (
     <nav>
         <div className="outer-nav-container">
