@@ -26,23 +26,11 @@ nav {
 
 .navLink,
 .navLink:hover,
-.navLink:visited,
-.button,
-.button:hover,
-.button:visited {
+.navLink:visited {
     padding: 10px;
     text-decoration: none;
     color: orange;
     cursor: pointer;
-}
-
-.button:hover {
-    color: mistyrose
-}
-
-.button:active {
-    background-color: mistyrose;
-    color: orange;
 }
 
 
