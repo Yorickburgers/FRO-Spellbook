@@ -4,6 +4,13 @@
   width: 100%;
   height: 100%;
   align-items: center;
+  --lightparchment: #F7EFC9;
+  --parchment: #D8B87F;
+  --pink: #E4007C;
+  --purple: #6437B7;
+  --blue: #69BDFC;
+  --ink: #081E49;
+  --coral: #EA8151;
 }
 
 body, html {
