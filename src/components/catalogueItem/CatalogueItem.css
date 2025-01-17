@@ -1,0 +1,11 @@
+.catalogue-item {
+    width: 100%;
+    background-color: var(--lightparchment);
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.catalogue-item p {
+    background-color: transparent;
+}
