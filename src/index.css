@@ -11,7 +11,6 @@
   --blue: #69BDFC;
   --ink: #081E49;
   --coral: #EA8151;
-
 }
 
 @font-face {
@@ -21,10 +20,12 @@
 
 body, html {
   height: 100%;
+  background-image: url("src/assets/astralplanes.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 main {
-  background-image: url("src/assets/astralplanes.jpg");
-  background-attachment: local;
-  background-size: cover;
+  background-color: transparent;
 }
