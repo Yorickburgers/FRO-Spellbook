@@ -2,7 +2,7 @@ nav {
     display: flex;
     flex-direction: row;
     height: 60px;
-    background-color: rebeccapurple;
+    background-color: var(--purple);
     width: 100%;
     padding: 10px;
     justify-content: space-between;
@@ -14,12 +14,12 @@ nav {
     height: 100%;
     align-items: center;
     justify-content: start;
-    background-color: rebeccapurple;
+    background-color: var(--purple);
 }
 
 .input-container,
 .navLink {
-    background-color: rebeccapurple;
+    background-color: var(--purple);
 }
 
 /* ----------------- Links ----------------- */
@@ -29,7 +29,18 @@ nav {
 .navLink:visited {
     padding: 10px;
     text-decoration: none;
-    color: orange;
+    color: var(--coral);
+    cursor: pointer;
+}
+
+.navLink-account,
+.navLink-account:hover,
+.navLink-account:visited {
+    padding: 15px 7px;
+    text-decoration: none;
+    color: var(--ink);
+    background-color: var(--blue);
+    border-radius: 30px;
     cursor: pointer;
 }
 
@@ -41,7 +52,7 @@ nav {
     height: 100%;
     width: auto;
     text-decoration: none;
-    background-color: rebeccapurple;
+    background-color: var(--purple);
 }
 
 .logo-wrapper a {
@@ -53,11 +64,11 @@ nav {
 .logoName:hover,
 .logoName:visited {
     text-decoration: none;
-    color: orange;
+    color: var(--coral);
     margin-right: 10px;
     margin-left: 10px;
     align-self: center;
-    background-color: rebeccapurple;
+    background-color: var(--purple);
 }
 
 /* ------------------- Inputs --------------- */
@@ -67,10 +78,10 @@ nav {
     border-radius: 12px;
     border: solid 1px transparent;
     margin: 5px;
-    background-color: mistyrose;
+    background-color: var(--lightparchment);
 }
 
 .accountInput:focus {
-    border: solid 1px orange;
+    border: solid 1px var(--coral);
     outline: none;
 }

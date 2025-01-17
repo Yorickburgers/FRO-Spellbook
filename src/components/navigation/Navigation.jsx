@@ -1,9 +1,16 @@
 import './Navigation.css';
 import logo from "../../assets/spellbook-logo.png"
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
 
 function Navigation() {
+    const navigate = useNavigate();
+
+    function clickHandler(e, link) {
+        e.preventDefault();
+        navigate(link);
+    }
+
     return (
         <nav>
             <div className="outer-nav-container">
@@ -25,14 +32,7 @@ function Navigation() {
                 />
             </div>
             <div className="outer-nav-container">
-                <div className="input-container">
-                    <input className="accountInput" type="text" name="userName" placeholder="Username"/>
-                    <input className="accountInput" type="text" name="password" placeholder="Password"/>
-                </div>
-                <Button
-                    text="Login"
-                    link="/"
-                />
+                <NavLink className="navLink-account" to="/login">Login</NavLink>
             </div>
         </nav>
     );

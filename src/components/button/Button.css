@@ -1,7 +1,7 @@
 .button {
     border-radius: 20px;
-    color: orange;
-    background-color: deeppink;
+    color: var(--coral);
+    background-color: var(--pink);
     padding: 10px;
     border: none;
     margin-left: 10px;
@@ -9,10 +9,10 @@
 
 .button:hover {
     cursor: pointer;
-    color: mistyrose
+    color: var(--lightparchment);
 }
 
 .button:active {
-    background-color: mistyrose;
-    color: orange;
+    background-color: var(--lightparchment);
+    color: var(--coral);
 }
