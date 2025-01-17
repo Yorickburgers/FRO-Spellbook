@@ -46,26 +46,32 @@ function Catalogue() {
                             <SortButton
                                 text="Name"
                                 sortStyle="null"
+                                className="catalogue-name"
                             />
                             <SortButton
                                 text="Class"
                                 sortStyle="null"
+                                className="catalogue-classes"
                             />
                             <SortButton
                                 text="Damage"
                                 sortStyle="null"
+                                className="catalogue-damage"
                             />
                             <SortButton
                                 text="Type"
                                 sortStyle="null"
+                                className="catalogue-type"
                             />
                             <SortButton
-                                text="Duration"
+                                text="Casting Time"
                                 sortStyle="null"
+                                className="catalogue-cast"
                             />
                             <SortButton
                                 text="Range"
                                 sortStyle="null"
+                                className="catalogue-range"
                             />
                         </div>
                         <ul className="catalogue-list">

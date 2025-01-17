@@ -1,10 +1,10 @@
 import './SortButton.css';
 
-function SortButton({text, sortStyle}) {
+function SortButton({text, sortStyle, className}) {
     return (
         <button
             type="button"
-            className="sorting-button"
+            className={`sorting-button ${className}`}
             onClick={sortStyle}
         >{text}
         </button>

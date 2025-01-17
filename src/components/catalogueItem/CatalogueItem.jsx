@@ -38,17 +38,17 @@ function CatalogueItem({index, name, url}) {
     const classes = spellDetails.classes ? spellDetails.classes.map((cls) => cls.name).join(", ") : " ";
     const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || " ";
     const damageType = spellDetails?.damage?.damage_type?.name || " ";
-    const duration = spellDetails.duration || " ";
+    const castTime = spellDetails.casting_time || " ";
     const range = spellDetails.range || " ";
 
     return (
         <li className="catalogue-item" key={index}>
-            <p>{name}</p>
-            <p>{classes}</p>
-            <p>{damage}</p>
-            <p>{damageType}</p>
-            <p>{duration}</p>
-            <p>{range}</p>
+            <p className="catalogue-name">{name}</p>
+            <p className="catalogue-classes">{classes}</p>
+            <p className="catalogue-damage">{damage}</p>
+            <p className="catalogue-type">{damageType}</p>
+            <p className="catalogue-cast">{castTime}</p>
+            <p className="catalogue-range">{range}</p>
         </li>
     );
 }

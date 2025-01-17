@@ -6,9 +6,6 @@
     width: 100%;
     height: 100%;
     justify-content: space-evenly;
-    background-image: url("src/assets/astralplanes.jpg");
-    background-size: cover;
-    background-position: center;
     align-items: center;
     flex-grow: 0;
     flex-shrink: 1;

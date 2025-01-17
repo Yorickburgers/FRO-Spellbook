@@ -15,3 +15,28 @@
     width: 100%;
     background-color: var(--lightparchment);
 }
+
+/* ------------- catalogue-items ------------*/
+.catalogue-name {
+    width: 120px;
+}
+
+.catalogue-classes {
+    width: 120px;
+}
+
+.catalogue-damage {
+    width: 24px;
+}
+
+.catalogue-type {
+    width: 36px;
+}
+
+.catalogue-cast {
+    width: 120px;
+}
+
+.catalogue-range {
+    width: 60px;
+}
