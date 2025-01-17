@@ -79,7 +79,7 @@ function Catalogue() {
                             {spells.map((spell) => (
                                 <CatalogueItem
                                 name={spell.name}
-                                key={spell.index}
+                                index={spell.index}
                                 url={spell.url}
                                 />
                                 ))}

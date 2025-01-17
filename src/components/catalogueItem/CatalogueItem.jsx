@@ -1,11 +1,11 @@
 import './CatalogueItem.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 function CatalogueItem({index, name, url}) {
     const [spellDetails, setSpellDetails] = useState({});
     const [loading, setLoading] = useState(true);
-
 
 
     useEffect(() => {
@@ -23,6 +23,7 @@ function CatalogueItem({index, name, url}) {
                 setLoading(false);
             }
         }
+
         getSpellDetails();
 
         return function cleanup() {
@@ -44,14 +45,16 @@ function CatalogueItem({index, name, url}) {
     const range = spellDetails.range || " ";
 
     return (
-        <li className="catalogue-item" key={index}>
-            <p className="catalogue-name">{name}</p>
-            <p className="catalogue-classes">{classes}</p>
-            <p className="catalogue-damage">{damage}</p>
-            <p className="catalogue-type">{damageType}</p>
-            <p className="catalogue-cast">{castTime}</p>
-            <p className="catalogue-range">{range}</p>
-        </li>
+        <NavLink className="catalogueLink" to={`/spells/${index}`}>
+            <li className="catalogue-item" key={index}>
+                <p className="catalogue-name">{name}</p>
+                <p className="catalogue-classes">{classes}</p>
+                <p className="catalogue-damage">{damage}</p>
+                <p className="catalogue-type">{damageType}</p>
+                <p className="catalogue-cast">{castTime}</p>
+                <p className="catalogue-range">{range}</p>
+            </li>
+        </NavLink>
     );
 }
 
