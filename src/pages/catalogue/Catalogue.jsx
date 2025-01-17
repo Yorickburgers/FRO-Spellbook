@@ -8,19 +8,29 @@ function Catalogue() {
     const [spells, setSpells] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    async function getSpells() {
-        try {
-            const response = await axios.get("https://www.dnd5eapi.co/api/spells");
-            setSpells(response.data.results);
-        } catch (e) {
-            console.error(e)
-        } finally {
-            setLoading(false);
-        }
-    }
+
 
     useEffect(() => {
-            getSpells();
+        const controller = new AbortController();
+
+        async function getSpells() {
+            try {
+                const response = await axios.get("https://www.dnd5eapi.co/api/spells", {
+                    signal: controller.signal,
+                });
+                setSpells(response.data.results);
+            } catch (e) {
+                console.error(e)
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        getSpells();
+
+        return function cleanup() {
+            controller.abort();
+        }
     }, []);
 
     if (loading) {
@@ -63,11 +73,7 @@ function Catalogue() {
                                 <CatalogueItem
                                 name={spell.name}
                                 key={spell.index}
-                                classes="wiz"
-                                damage="4d4"
-                                type="acid"
-                                duration="instant"
-                                range="120 feet"
+                                url={spell.url}
                                 />
                                 ))}
                         </ul>
