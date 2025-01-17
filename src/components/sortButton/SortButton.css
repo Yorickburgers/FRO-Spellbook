@@ -1,0 +1,8 @@
+.sorting-button {
+    background-color: var(--parchment);
+    color: var(--ink);
+}
+
+.sorting-button:hover {
+    color: var(--purple);
+}
