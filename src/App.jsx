@@ -10,6 +10,11 @@ function App() {
       <Navigation/>
       <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/spells" />
+          <Route path="/favourites" />
+          <Route path="/search" />
+          <Route path="/login" />
+          <Route path="*" />
       </Routes>
     </>
   )
