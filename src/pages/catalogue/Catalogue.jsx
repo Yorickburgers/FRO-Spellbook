@@ -81,6 +81,7 @@ function Catalogue() {
                                 name={spell.name}
                                 index={spell.index}
                                 url={spell.url}
+                                key={spell.index}
                                 />
                                 ))}
                         </ul>

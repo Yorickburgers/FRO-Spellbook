@@ -9,7 +9,12 @@
 }
 
 .sorting-button:hover {
-    color: var(--purple);
+    color: var(--coral);
+    cursor: pointer;
+}
+
+.sorting-button:active {
+    background-color: var(--lightparchment);
 }
 
 .sorting-button+.sorting-button {
