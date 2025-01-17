@@ -4,7 +4,7 @@ import logo from "../../assets/spellbook-logo.png";
 
 function Home() {
 return (
-    <div className="page-container">
+    <main className="page-container">
         <div className="outer-container">
             <span className="logo-wrapper-large">
                 <img src={logo} alt="spellbook logo"/>
@@ -54,7 +54,7 @@ return (
                 />
             </article>
         </div>
-    </div>
+    </main>
 );
 }
 
