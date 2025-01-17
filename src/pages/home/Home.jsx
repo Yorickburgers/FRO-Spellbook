@@ -9,7 +9,7 @@ function Home() {
             <span className="logo-wrapper-large">
                 <img src={logo} alt="spellbook logo"/>
             </span>
-                <div className="inner-container">
+                <div className="home-inner-container">
                     <h1>Welcome to Spellbook!</h1>
                     <p>Spellbook is an application that enables you to look up spells for your Dungeons & Dragons
                         character. You can use it to:</p>

@@ -5,10 +5,15 @@
     display: flex;
     flex-direction: row;
     margin: 6px 0;
+    justify-content: space-between;
+    text-align: start;
+    height: 40px;
 }
 
 .catalogue-item p {
     background-color: transparent;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 

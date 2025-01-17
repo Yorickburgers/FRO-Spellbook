@@ -34,14 +34,14 @@ function Catalogue() {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>; // Show loading message while data is being fetched
+        return <div>Loading...</div>;
     }
 
         return (
             <main className="page-container">
                 <div className="outer-container">
-                    <div className="inner-container filters">test</div>
-                    <div className="inner-container">
+                    <div className="catalogue filters">test</div>
+                    <div className="catalogue">
                         <div className="sorting-tags-container">
                             <SortButton
                                 text="Name"

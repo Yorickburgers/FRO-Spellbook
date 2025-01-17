@@ -32,10 +32,12 @@ function CatalogueItem({index, name, url}) {
 
     console.log(spellDetails)
     if (loading) {
-        return <div>Loading...</div>; // Show loading message while data is being fetched
+        return <div>Loading...</div>;
     }
 
-    const classes = spellDetails.classes ? spellDetails.classes.map((cls) => cls.name).join(", ") : " ";
+    const classes = spellDetails.classes
+        ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
+        : " ";
     const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || " ";
     const damageType = spellDetails?.damage?.damage_type?.name || " ";
     const castTime = spellDetails.casting_time || " ";

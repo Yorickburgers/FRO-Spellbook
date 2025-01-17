@@ -41,7 +41,7 @@
 }
 
 /* ------------------ Introduction ------------- */
-.inner-container {
+.home-inner-container {
     display: flex;
     flex-direction: column;
     max-width: 600px;
@@ -54,21 +54,21 @@
     padding: 24px;
 }
 
-.inner-container h1,
-.inner-container p,
-li,
-ul {
+.home-inner-container h1,
+.home-inner-container p,
+.home-inner-container li,
+.home-inner-container ul {
     color: var(--ink);
     background-color: var(--parchment);
     margin-left: 24px;
 }
 
-.inner-container h1 {
+.home-inner-container h1 {
     margin-bottom: 24px;
     font-size: 48px;
 }
 
-ul {
+.home-inner-container ul {
     margin: 12px;
 }
 

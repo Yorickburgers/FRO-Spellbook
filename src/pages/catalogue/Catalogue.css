@@ -2,11 +2,24 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-
+    justify-content: space-between;
 }
 
+.catalogue {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    height: 100%;
+    background-color: var(--parchment);
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
+    border-radius: 30px;
+}
+
+
 .filters {
-    justify-self: start;
+    align-self: start;
 }
 
 .catalogue-list {
@@ -18,7 +31,8 @@
 
 /* ------------- catalogue-items ------------*/
 .catalogue-name {
-    width: 120px;
+    width: 180px;
+    padding-left: 12px;
 }
 
 .catalogue-classes {
@@ -26,15 +40,15 @@
 }
 
 .catalogue-damage {
-    width: 24px;
+    width: 48px;
 }
 
 .catalogue-type {
-    width: 36px;
+    width: 90px;
 }
 
 .catalogue-cast {
-    width: 120px;
+    width: 90px;
 }
 
 .catalogue-range {
