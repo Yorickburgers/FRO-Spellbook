@@ -35,11 +35,11 @@ function CatalogueItem({index, name, url}) {
         return <div>Loading...</div>; // Show loading message while data is being fetched
     }
 
-    const classes = spellDetails.classes ? spellDetails.classes.map((cls) => cls.name).join(", ") : "No classes available";
-    const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || "No damage data";
-    const damageType = spellDetails?.damage?.damage_type?.name || "No damage type";
-    const duration = spellDetails.duration || "No duration available";
-    const range = spellDetails.range || "No range available";
+    const classes = spellDetails.classes ? spellDetails.classes.map((cls) => cls.name).join(", ") : " ";
+    const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || " ";
+    const damageType = spellDetails?.damage?.damage_type?.name || " ";
+    const duration = spellDetails.duration || " ";
+    const range = spellDetails.range || " ";
 
     return (
         <li className="catalogue-item" key={index}>
