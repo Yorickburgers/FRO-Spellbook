@@ -1,0 +1,31 @@
+.catalogue-item {
+    width: 100%;
+    background-color: var(--lightparchment);
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 6px 0;
+    justify-content: space-between;
+    text-align: start;
+    height: 32px;
+}
+
+.catalogue-item p {
+    background-color: transparent;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.catalogueLink,
+.catalogueLink:visited,
+.catalogueLink:hover {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.catalogueLink:hover {
+    color: var(--coral);
+}
+
+
+

@@ -1,0 +1,75 @@
+.catalogue-outer-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.catalogue {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--parchment);
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 60px;
+    max-width: 1200px;
+}
+
+.sorting-tags-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 30px;
+    justify-content: space-between;
+}
+
+.filters {
+    display: flex;
+    align-self: start;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--parchment);
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 60px;
+    max-width: 1200px;
+}
+
+.catalogue-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--lightparchment);
+}
+
+/* ------------- catalogue-items ------------*/
+.catalogue-name {
+    width: 240px;
+    padding-left: 12px;
+}
+
+.catalogue-classes {
+    width: 180px;
+}
+
+.catalogue-damage {
+    width: 72px;
+}
+
+.catalogue-type {
+    width: 90px;
+}
+
+.catalogue-cast {
+    width: 90px;
+}
+
+.catalogue-range {
+    width: 60px;
+}
