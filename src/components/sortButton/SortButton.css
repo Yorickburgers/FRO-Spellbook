@@ -1,8 +1,14 @@
 .sorting-button {
     background-color: var(--parchment);
     color: var(--ink);
+    border: none;
+    border-bottom: solid 1px var(--ink);
 }
 
 .sorting-button:hover {
     color: var(--purple);
+}
+
+.sorting-button+.sorting-button {
+    border-left: 1px solid var(--ink);
 }

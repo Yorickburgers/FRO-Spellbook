@@ -33,7 +33,7 @@ return (
                     sortStyle="null"
                 />
                 </div>
-            <ul>
+            <ul className="catalogue-list">
                 <li>spell 1</li>
                 <li>spell2</li>
             </ul>
