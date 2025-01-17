@@ -19,9 +19,9 @@ function Catalogue() {
         }
     }
 
-        useEffect(() => {
+    useEffect(() => {
             getSpells();
-        }, []);
+    }, []);
 
     if (loading) {
         return <div>Loading...</div>; // Show loading message while data is being fetched
