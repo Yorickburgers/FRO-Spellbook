@@ -6,3 +6,8 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.page-title {
+  margin-top: 120px;
+  color: var(--coral);
+}

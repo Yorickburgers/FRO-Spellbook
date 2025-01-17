@@ -3,6 +3,9 @@
     color: var(--ink);
     border: none;
     border-bottom: solid 1px var(--ink);
+    height: 40px;
+    text-align: start;
+    padding-left: 10px;
 }
 
 .sorting-button:hover {
@@ -11,4 +14,12 @@
 
 .sorting-button+.sorting-button {
     border-left: 1px solid var(--ink);
+}
+
+.sorting-button:first-child {
+    border-radius: 30px 0 0 0;
+}
+
+.sorting-button:last-child {
+    border-radius: 0 30px 0 0;
 }

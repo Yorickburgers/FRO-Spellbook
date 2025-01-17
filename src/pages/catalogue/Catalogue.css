@@ -1,25 +1,44 @@
-.sorting-tags-container {
+.catalogue-outer-container {
     display: flex;
     flex-direction: row;
     width: 100%;
+    height: 100%;
     justify-content: space-between;
 }
 
 .catalogue {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
     height: 100%;
     background-color: var(--parchment);
     flex-grow: 0;
     flex-shrink: 1;
     align-items: center;
     border-radius: 30px;
+    margin-top: 60px;
+    max-width: 1200px;
 }
 
+.sorting-tags-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 30px;
+    justify-content: space-between;
+}
 
 .filters {
+    display: flex;
     align-self: start;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--parchment);
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 60px;
+    max-width: 1200px;
 }
 
 .catalogue-list {
@@ -31,7 +50,7 @@
 
 /* ------------- catalogue-items ------------*/
 .catalogue-name {
-    width: 180px;
+    width: 240px;
     padding-left: 12px;
 }
 
@@ -40,7 +59,7 @@
 }
 
 .catalogue-damage {
-    width: 48px;
+    width: 72px;
 }
 
 .catalogue-type {

@@ -6,6 +6,10 @@ nav {
     width: 100%;
     padding: 10px;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .outer-nav-container {

@@ -39,8 +39,9 @@ function Catalogue() {
 
         return (
             <main className="page-container">
-                <div className="outer-container">
-                    <div className="catalogue filters">test</div>
+                <h1 className="page-title">Catalogue</h1>
+                <div className="catalogue-outer-container">
+                    <div className="filters">test</div>
                     <div className="catalogue">
                         <div className="sorting-tags-container">
                             <SortButton
@@ -84,6 +85,7 @@ function Catalogue() {
                                 ))}
                         </ul>
                     </div>
+                    <div></div>
                 </div>
             </main>
         );
