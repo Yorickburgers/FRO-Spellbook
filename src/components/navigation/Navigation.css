@@ -6,6 +6,10 @@ nav {
     width: 100%;
     padding: 10px;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .outer-nav-container {
@@ -33,6 +37,20 @@ nav {
     cursor: pointer;
 }
 
+.navLink::after {
+    display: block;
+    content: "";
+    width: 0%;
+    height: 1px;
+    background-color: var(--coral);
+    opacity: 50%;
+    transition: width .5s ease-in-out;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
 .navLink-account,
 .navLink-account:hover,
 .navLink-account:visited {
@@ -42,6 +60,15 @@ nav {
     background-color: var(--blue);
     border-radius: 30px;
     cursor: pointer;
+}
+
+.navLink-account:hover {
+    color: var(--lightparchment);
+}
+
+.navLink-account:active {
+    background-color: var(--lightparchment);
+    color: var(--purple);
 }
 
 
