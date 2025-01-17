@@ -21,6 +21,7 @@
     max-width: 1200px;
     flex-grow: 0;
     flex-shrink: 1;
+    background-color: transparent;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
@@ -33,11 +34,13 @@
     flex-shrink: 1;
     height: 280px;
     width: 280px;
+    background-color: transparent;
 }
 
 .logo-wrapper-large img {
     height: 100%;
     width: auto;
+    background-color: transparent;
 }
 
 /* ------------------ Introduction ------------- */
@@ -46,26 +49,30 @@
     flex-direction: column;
     max-width: 600px;
     height: 100%;
+    background-color: var(--parchment);
     flex-grow: 0;
     flex-shrink: 1;
     align-items: center;
+    border-radius: 30px;
+    padding: 24px;
 }
 
 .inner-container h1,
 .inner-container p,
-li {
-    color: var(--purple);
+li,
+ul {
+    color: var(--ink);
+    background-color: var(--parchment);
     margin-left: 24px;
 }
 
 .inner-container h1 {
     margin-bottom: 24px;
     font-size: 48px;
-    margin-top: 24px;
 }
 
 ul {
-    margin: 24px 24px;
+    margin: 12px;
 }
 
 /* --------------- function-boxes -------------- */
@@ -77,10 +84,10 @@ ul {
     text-align: start;
     width: 300px;
     height: 300px;
-    border: solid 1px var(--purple);
-    background-color: var(--purple);
-    color: var(--coral);
-    box-shadow: grey -5px 5px;
+    border: solid 1px var(--parchment);
+    background-color: var(--parchment);
+    color: var(--ink);
+    box-shadow: var(--lightparchment) -5px 5px;
     border-radius: 10px;
     padding: 24px;
     margin: 24px;

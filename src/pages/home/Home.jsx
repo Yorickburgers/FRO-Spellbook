@@ -40,7 +40,7 @@ return (
                 <div><input placeholder='for example "wish"' className="accountInput" type="text"
                             name="searchTerm"/>
                     <Button
-                        text="Zoek"
+                        text="Search"
                         link="/spells"
                     /></div>
             </article>
