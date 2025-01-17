@@ -1,0 +1,106 @@
+/* ------------ Reusables ---------------- */
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    background-image: url("src/assets/astralplanes.jpg");
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.outer-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    background-color: transparent;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ------------------ logo ------------------ */
+.logo-wrapper-large {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 1;
+    height: 280px;
+    width: 280px;
+    background-color: transparent;
+}
+
+.logo-wrapper-large img {
+    height: 100%;
+    width: auto;
+    background-color: transparent;
+}
+
+/* ------------------ Introduction ------------- */
+.inner-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    height: 100%;
+    background-color: var(--parchment);
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
+    border-radius: 30px;
+    padding: 24px;
+}
+
+.inner-container h1,
+.inner-container p,
+li,
+ul {
+    color: var(--ink);
+    background-color: var(--parchment);
+    margin-left: 24px;
+}
+
+.inner-container h1 {
+    margin-bottom: 24px;
+    font-size: 48px;
+}
+
+ul {
+    margin: 12px;
+}
+
+/* --------------- function-boxes -------------- */
+.function-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: start;
+    width: 300px;
+    height: 300px;
+    border: solid 1px var(--parchment);
+    background-color: var(--parchment);
+    color: var(--ink);
+    box-shadow: var(--lightparchment) -5px 5px;
+    border-radius: 10px;
+    padding: 24px;
+    margin: 24px;
+}
+
+.function-box h2,
+.function-box p {
+    background-color: transparent;
+}
+
+.function-box div {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+}
+
