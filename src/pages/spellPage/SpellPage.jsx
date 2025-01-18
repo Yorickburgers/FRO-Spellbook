@@ -1,27 +1,73 @@
 import './SpellPage.css';
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useParams} from "react-router-dom";
 
 function SpellPage() {
-return (
+    const { id } = useParams();
+    const [spellDetails, setSpellDetails] = useState({});
+    const [loading, setLoading] = useState(true);
+
+
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function getSpells() {
+            try {
+                const response = await axios.get(`https://www.dnd5eapi.co/api/spells/${id}`, {
+                    signal: controller.signal,
+                });
+                setSpellDetails(response.data);
+            } catch (e) {
+                console.error(e)
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        getSpells();
+
+        return function cleanup() {
+            controller.abort();
+        }
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    const classes = spellDetails.classes
+        ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
+        : " ";
+    const damageType = spellDetails?.damage?.damage_type?.name || " ";
+    const castTime = spellDetails?.casting_time || " ";
+    const range = spellDetails?.range || " ";
+    const attack = spellDetails?.attack_type || " ";
+    const description = spellDetails?.desc || " ";
+    const upcast = spellDetails?.higher_level || " ";
+    const duration = spellDetails?.duration || " ";
+    const level = spellDetails?.level || " ";
+
+    return (
 <main className="page-container">
     <h1 className="page-title">Spell Details</h1>
     <div className="spell-outer-container">
         <div className="hide-bar">hide</div>
         <div className="spell-details-container">
-            <h1 className="spell-name">Acid Arrow</h1>
+            <h1 className="spell-name">{spellDetails.name}</h1>
             <div className="spell-attributes-container">
-                <p className="spell-attribute">Level: 2nd</p>
-                <p className="spell-attribute">Duration: Instantaneous</p>
-                <p className="spell-attribute"> Components: V, S, M</p>
-                <p className="spell-attribute">Classes: Wiz</p>
-            {/*</div>*/}
-            {/*<div className="spell-attributes-container">*/}
-                <p className="spell-attribute">Casting time: 1 action</p>
-                <p className="spell-attribute">Range: 90 feet</p>
-                <p className="spell-attribute">Attack: Ranged</p>
-                <p className="spell-attribute">Damage: Acid</p>
+                <p className="spell-attribute">Level: {level}</p>
+                <p className="spell-attribute">Duration: {duration}</p>
+                <p className="spell-attribute">Components: {spellDetails?.components && spellDetails.components.map((comp) => comp).join(", ")}</p>
+                <p className="spell-attribute">Classes: {classes}</p>
+                <p className="spell-attribute">Casting time: {castTime}</p>
+                <p className="spell-attribute">Range: {range}</p>
+                <p className="spell-attribute">Attack: {attack}</p>
+                <p className="spell-attribute">Damage: {damageType}</p>
             </div>
-            <p className="spell-description">A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p>
-            <p className="spell-description">Upcast: When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.</p>
+            <p className="spell-description">{description}</p>
+            {upcast && <p className="spell-description">Upcast: {upcast}</p>}
         </div>
         <div></div>
     </div>

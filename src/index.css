@@ -20,6 +20,9 @@
 
 body, html {
   height: 100%;
+}
+
+body {
   background-image: url("src/assets/astralplanes.jpg");
   background-attachment: fixed;
   background-size: cover;

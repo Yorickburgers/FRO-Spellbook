@@ -17,7 +17,7 @@ function App() {
           <Route path="/search" />
           <Route path="/login" />
           <Route path="*" />
-          <Route path="/spells/acid-arrow" element={<SpellPage/>}/>
+          <Route path="/spells/:id" element={<SpellPage/>}/>
       </Routes>
     </>
   )
