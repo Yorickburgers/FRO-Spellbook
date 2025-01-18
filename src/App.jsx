@@ -4,6 +4,7 @@ import Navigation from "./components/navigation/Navigation.jsx";
 import Home from "./pages/home/Home.jsx";
 import Catalogue from "./pages/catalogue/Catalogue.jsx";
 import SpellPage from "./pages/spellPage/SpellPage.jsx";
+import NotFound from "./pages/notFound/NotFound.jsx";
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
           <Route path="/favourites" />
           <Route path="/search" />
           <Route path="/login" />
-          <Route path="*" />
+          <Route path="*" element={<NotFound/>}/>
           <Route path="/spells/:id" element={<SpellPage/>}/>
       </Routes>
     </>
