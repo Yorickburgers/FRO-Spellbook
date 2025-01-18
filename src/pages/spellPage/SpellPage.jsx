@@ -1,17 +1,18 @@
 import './SpellPage.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function SpellPage() {
     const { id } = useParams();
     const [spellDetails, setSpellDetails] = useState({});
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         const controller = new AbortController();
+
 
         async function getSpells() {
             try {
@@ -20,7 +21,10 @@ function SpellPage() {
                 });
                 setSpellDetails(response.data);
             } catch (e) {
-                console.error(e)
+                console.error(e);
+                if (e.response && e.response.status === 404) {
+                    navigate("*");
+                }
             } finally {
                 setLoading(false);
             }
