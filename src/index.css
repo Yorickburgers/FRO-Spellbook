@@ -23,10 +23,8 @@ body, html {
 }
 
 body {
-  background-image: url("src/assets/astralplanes.jpg");
-  background-attachment: fixed;
   background-size: cover;
-  background-position: center;
+  background: url("/assets/astralplanes.jpg") fixed center;
 }
 
 main {

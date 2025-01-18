@@ -1,5 +1,5 @@
 import './Navigation.css';
-import logo from "../../assets/spellbook-logo.png"
+import logo from "../../../public/assets/spellbook-logo.png"
 import {NavLink, useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
 

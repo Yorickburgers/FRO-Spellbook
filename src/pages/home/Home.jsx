@@ -1,6 +1,6 @@
 import './Home.css';
 import Button from "../../components/button/Button.jsx";
-import logo from "../../assets/spellbook-logo.png";
+import logo from "/src/assets/spellbook-logo.png";
 
 function Home() {
     return (
