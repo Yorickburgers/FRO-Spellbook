@@ -40,8 +40,8 @@ function Catalogue() {
         return (
             <main className="page-container">
                 <h1 className="page-title">Catalogue</h1>
-                <div className="catalogue-outer-container">
-                    <div className="filters">test</div>
+                <div className="spell-outer-container">
+                    <div className="filters">filters</div>
                     <div className="catalogue">
                         <div className="sorting-tags-container">
                             <SortButton
