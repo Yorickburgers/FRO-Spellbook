@@ -35,7 +35,7 @@ function SpellPage() {
         return function cleanup() {
             controller.abort();
         }
-    }, []);
+    }, [id, navigate]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -43,15 +43,20 @@ function SpellPage() {
 
     const classes = spellDetails.classes
         ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
-        : " ";
-    const damageType = spellDetails?.damage?.damage_type?.name || " ";
-    const castTime = spellDetails?.casting_time || " ";
-    const range = spellDetails?.range || " ";
-    const attack = spellDetails?.attack_type || " ";
-    const description = spellDetails?.desc || " ";
-    const upcast = spellDetails?.higher_level || " ";
-    const duration = spellDetails?.duration || " ";
-    const level = spellDetails?.level || " ";
+        : null;
+    const damageType = spellDetails?.damage?.damage_at_slot_level?.[spellDetails?.level] && spellDetails?.damage?.damage_type?.name
+        ? `${spellDetails?.damage?.damage_at_slot_level[spellDetails?.level]} ${spellDetails?.damage?.damage_type?.name}`
+        : null;
+    const castTime = spellDetails?.casting_time || null;
+    const range = spellDetails?.range || null;
+    const attack = spellDetails?.attack_type || null;
+    const description = Array.isArray(spellDetails?.desc)
+        ? spellDetails.desc.map((desc, index) => <p key={index} className="spell-description">{desc}</p>)
+        : <p className="spell-description">{spellDetails?.desc || null}</p>;
+    const upcast = spellDetails?.higher_level?.length > 0 ? spellDetails?.higher_level : null;
+    const duration = spellDetails?.duration || null;
+    const level = spellDetails?.level || "cantrip";
+    const dc = spellDetails?.dc?.dc_type?.name || null;
 
     return (
 <main className="page-container">
@@ -67,10 +72,11 @@ function SpellPage() {
                 <p className="spell-attribute">Classes: {classes}</p>
                 <p className="spell-attribute">Casting time: {castTime}</p>
                 <p className="spell-attribute">Range: {range}</p>
-                <p className="spell-attribute">Attack: {attack}</p>
-                <p className="spell-attribute">Damage: {damageType}</p>
+                {attack && <p className="spell-attribute">Attack: {attack}</p>}
+                {dc && <p className="spell-attribute">DC: {dc}</p>}
+                {damageType !== undefined + " " + undefined && <p className="spell-attribute">Damage: {damageType}</p>}
             </div>
-            <p className="spell-description">{description}</p>
+            {description}
             {upcast && <p className="spell-description">Upcast: {upcast}</p>}
         </div>
         <div></div>

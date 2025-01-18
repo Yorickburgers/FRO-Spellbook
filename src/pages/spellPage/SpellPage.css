@@ -33,5 +33,5 @@
 }
 
 .spell-description {
-    font-size: 24px;
+    font-size: clamp(12px, 1vw, 24px);
 }
