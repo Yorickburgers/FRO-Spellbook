@@ -20,10 +20,11 @@
 
 body, html {
   height: 100%;
-  background-image: url("src/assets/astralplanes.jpg");
-  background-attachment: fixed;
+}
+
+body {
   background-size: cover;
-  background-position: center;
+  background: url("/assets/astralplanes.jpg") fixed center;
 }
 
 main {
