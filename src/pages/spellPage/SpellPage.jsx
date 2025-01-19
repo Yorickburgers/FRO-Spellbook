@@ -2,9 +2,10 @@ import './SpellPage.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
+import Button from "../../components/button/Button.jsx";
 
 function SpellPage() {
-    const { id } = useParams();
+    const {id} = useParams();
     const [spellDetails, setSpellDetails] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -57,30 +58,35 @@ function SpellPage() {
     const dc = spellDetails?.dc?.dc_type?.name || null;
 
     return (
-<main className="page-container">
-    <h1 className="page-title">Spell Details</h1>
-    <div className="spell-outer-container">
-        <div className="hide-bar">hide</div>
-        <div className="spell-details-container">
-            <h1 className="spell-name">{spellDetails.name}</h1>
-            <div className="spell-attributes-container">
-                <p className="spell-attribute">Level: {level}</p>
-                <p className="spell-attribute">Duration: {duration}</p>
-                <p className="spell-attribute">Components: {spellDetails?.components && spellDetails.components.map((comp) => comp).join(", ")}</p>
-                <p className="spell-attribute">Classes: {classes}</p>
-                <p className="spell-attribute">Casting time: {castTime}</p>
-                <p className="spell-attribute">Range: {range}</p>
-                {attack && <p className="spell-attribute">Attack: {attack}</p>}
-                {dc && <p className="spell-attribute">DC: {dc}</p>}
-                {damageType !== undefined + " " + undefined && damageType !== null && <p className="spell-attribute">Damage: {damageType}</p>}
+        <main className="page-container">
+            <h1 className="page-title">Spell Details</h1>
+            <div className="spell-outer-container">
+                <div className="hide-bar">hide</div>
+                <div className="spell-details-container" id="print">
+                    <h1 className="spell-name">{spellDetails.name}</h1>
+                    <div className="spell-attributes-container">
+                        <p className="spell-attribute">Level: {level}</p>
+                        <p className="spell-attribute">Duration: {duration}</p>
+                        <p className="spell-attribute">Components: {spellDetails?.components && spellDetails.components.map((comp) => comp).join(", ")}</p>
+                        <p className="spell-attribute">Classes: {classes}</p>
+                        <p className="spell-attribute">Casting time: {castTime}</p>
+                        <p className="spell-attribute">Range: {range}</p>
+                        {attack && <p className="spell-attribute">Attack: {attack}</p>}
+                        {dc && <p className="spell-attribute">DC: {dc}</p>}
+                        {damageType !== undefined + " " + undefined && damageType !== null &&
+                            <p className="spell-attribute">Damage: {damageType}</p>}
+                    </div>
+                    <div className="spell-description-container">{description}
+                        {upcast && <p className="spell-description">Upcast: {upcast}</p>}</div>
+                </div>
+                <button
+                    type="button"
+                    onClick={() => window.print()}
+                    className="button print-button"
+                >Print</button>
             </div>
-            <div className="spell-description-container">{description}
-            {upcast && <p className="spell-description">Upcast: {upcast}</p>}</div>
-        </div>
-        <div></div>
-    </div>
-</main>
-);
+        </main>
+    );
 }
 
 export default SpellPage;

@@ -18,6 +18,8 @@
     width: 100%;
     border-radius: 30px;
     justify-content: space-between;
+    position: sticky;
+    top: 60px;
 }
 
 .filters {

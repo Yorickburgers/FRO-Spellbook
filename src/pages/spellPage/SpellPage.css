@@ -11,6 +11,12 @@
     border-radius: 30px;
 }
 
+.spell-name {
+    text-align: center;
+    font-size: 42px;
+}
+
+/* --------- attributes -------------- */
 .spell-attributes-container {
     display: flex;
     flex-direction: row;
@@ -22,16 +28,14 @@
     row-gap: 12px
 }
 
-.spell-name {
-    text-align: center;
-    font-size: 42px;
-}
+
 .spell-attribute {
     text-align: start;
     min-width: 25%;
     font-size: 18px;
 }
 
+/* -------------- description ---------------- */
 .spell-description-container {
     height: auto;
     display: flex;
@@ -45,4 +49,26 @@
 
 .spell-description+.spell-description {
     margin: 0.5em 0;
+}
+
+/* ------------------- print + button ------------------ */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #print, #print * {
+        visibility: visible;
+        color: var(--ink);
+        background-color: var(--parchment);
+        border: inherit;
+    }
+}
+
+.print-button {
+    height: 48px;
+    border-radius: 30px;
+    position: relative;
+
+
 }
