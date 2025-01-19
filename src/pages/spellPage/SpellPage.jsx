@@ -2,7 +2,6 @@ import './SpellPage.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
-import Button from "../../components/button/Button.jsx";
 
 function SpellPage() {
     const {id} = useParams();
@@ -58,12 +57,24 @@ function SpellPage() {
     const dc = spellDetails?.dc?.dc_type?.name || null;
 
     return (
-        <main className="page-container">
+        <main className="page-container spell-details-outer">
             <h1 className="page-title">Spell Details</h1>
             <div className="spell-outer-container">
                 <div className="hide-bar">hide</div>
                 <div className="spell-details-container" id="print">
-                    <h1 className="spell-name">{spellDetails.name}</h1>
+                    <div className="spell-name-container">
+                        <button
+                            type="button"
+                            className="fav-button"
+                        >This will be a star</button>
+                        <h1 className="spell-name">{spellDetails.name}</h1>
+                        <button
+                            type="button"
+                            onClick={() => window.print()}
+                            className="button print-button"
+                        >Print
+                        </button>
+                    </div>
                     <div className="spell-attributes-container">
                         <p className="spell-attribute">Level: {level}</p>
                         <p className="spell-attribute">Duration: {duration}</p>
@@ -79,12 +90,9 @@ function SpellPage() {
                     <div className="spell-description-container">{description}
                         {upcast && <p className="spell-description">Upcast: {upcast}</p>}</div>
                 </div>
-                <button
-                    type="button"
-                    onClick={() => window.print()}
-                    className="button print-button"
-                >Print</button>
+                <div></div> {/*dummy for positioning */}
             </div>
+            <div></div> {/*dummy for positioning */}
         </main>
     );
 }

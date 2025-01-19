@@ -1,3 +1,7 @@
+.spell-details-outer {
+    justify-content: start;
+}
+
 .spell-details-container {
     display: flex;
     flex-direction: column;
@@ -9,6 +13,12 @@
     padding: 32px;
     margin: 24px 0 60px;
     border-radius: 30px;
+}
+
+.spell-name-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .spell-name {
@@ -25,7 +35,7 @@
     text-align: start;
     padding: 24px 0;
     flex-wrap: wrap;
-    row-gap: 12px
+    row-gap: 12px;
 }
 
 
@@ -63,12 +73,14 @@
         background-color: var(--parchment);
         border: inherit;
     }
+
+    button, button * {
+        visibility: hidden;
+    }
 }
 
 .print-button {
     height: 48px;
     border-radius: 30px;
-    position: relative;
-
 
 }
