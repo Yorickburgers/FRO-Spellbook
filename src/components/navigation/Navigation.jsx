@@ -1,5 +1,5 @@
 import './Navigation.css';
-import logo from "../../assets/spellbook-logo.png"
+import logo from "/src/assets/spellbook-logo.png";
 import {NavLink, useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
 
@@ -23,7 +23,7 @@ function Navigation() {
             </div>
             <div className="outer-nav-container">
                 <NavLink className="navLink" to="/">Home</NavLink>
-                <NavLink className="navLink" to="/spells">All spells</NavLink>
+                <NavLink className="navLink" to="/spells">Catalogue</NavLink>
                 <NavLink className="navLink" to="/favourites">Favourites</NavLink>
                 <input placeholder='for example "wish"' className="accountInput" type="text" name="searchTerm"/>
                 <Button

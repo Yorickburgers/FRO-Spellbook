@@ -1,0 +1,99 @@
+.spell-details-outer {
+    justify-content: start;
+}
+
+.spell-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: fit-content;
+    max-width: 800px;
+    background-color: var(--parchment);
+    color: var(--ink);
+    padding: 32px;
+    margin: 24px 0 60px;
+    border-radius: 30px;
+}
+
+/* ------------ name + star + button ------------- */
+.spell-name-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.spell-name {
+    text-align: center;
+    font-size: 48px;
+}
+
+.star {
+    font-size: 48px;
+    color: var(--lightparchment);
+}
+
+.star.favourited {
+    color: var(--pink);
+}
+
+.star:hover,
+.star-favourited:hover {
+    color: #ff7fc4;
+    cursor: pointer;
+}
+.print-button {
+    height: 48px;
+    border-radius: 30px;
+}
+
+/* --------- attributes -------------- */
+
+.spell-attributes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    gap: 10px;
+    padding: 24px 0;
+}
+
+
+.spell-attribute {
+    text-align: start;
+    min-width: 25%;
+    font-size: 18px;
+}
+
+/* -------------- description ---------------- */
+.spell-description-container {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spell-description {
+    font-size: 20px;
+}
+
+.spell-description+.spell-description {
+    margin: 0.5em 0;
+}
+
+/* ------------------- print + button ------------------ */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #print, #print * {
+        visibility: visible;
+        color: var(--ink);
+        background-color: var(--parchment);
+        border: inherit;
+    }
+
+    button, button * {
+        visibility: hidden;
+    }
+}
+
+

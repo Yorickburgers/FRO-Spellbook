@@ -39,8 +39,8 @@ function CatalogueItem({index, name, url}) {
     const classes = spellDetails.classes
         ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
         : " ";
-    const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || " ";
-    const damageType = spellDetails?.damage?.damage_type?.name || " ";
+    const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || spellDetails?.heal_at_slot_level?.[spellDetails.level] || " ";
+    const damageType = spellDetails?.damage?.damage_type?.name || (spellDetails?.heal_at_slot_level ? "Healing" : " ") || " ";
     const castTime = spellDetails.casting_time || " ";
     const range = spellDetails.range || " ";
 
