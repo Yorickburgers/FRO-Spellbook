@@ -55,7 +55,7 @@ function Catalogue() {
                                 className="catalogue-classes"
                             />
                             <SortButton
-                                text="Damage"
+                                text="Dam/Heal"
                                 sortStyle="null"
                                 className="catalogue-damage"
                             />

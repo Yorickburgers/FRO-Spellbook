@@ -45,6 +45,7 @@ function SpellPage() {
     const damageType = spellDetails?.damage?.damage_at_slot_level?.[spellDetails?.level] && spellDetails?.damage?.damage_type?.name
         ? `${spellDetails?.damage?.damage_at_slot_level[spellDetails?.level]} ${spellDetails?.damage?.damage_type?.name}`
         : null;
+    const healing = spellDetails?.heal_at_slot_level?.[spellDetails.level] || null;
     const castTime = spellDetails?.casting_time || null;
     const range = spellDetails?.range || null;
     const attack = spellDetails?.attack_type || null;
@@ -52,7 +53,7 @@ function SpellPage() {
         ? spellDetails.desc.map((desc, index) => (<p key={index} className="spell-description">{desc}</p>))
         : <p className="spell-description">{spellDetails?.desc || null}</p>;
     const upcast = spellDetails?.higher_level?.length > 0 ? spellDetails?.higher_level : null;
-    const duration = spellDetails?.duration || null;
+    const duration = spellDetails?.duration + (spellDetails?.concentration === true ? " (con)" : "") || null;
     const level = spellDetails?.level || "cantrip";
     const dc = spellDetails?.dc?.dc_type?.name || null;
 
@@ -81,6 +82,7 @@ function SpellPage() {
                         <p className="spell-attribute">Range: {range}</p>
                         {attack && <p className="spell-attribute">Attack: {attack}</p>}
                         {dc && <p className="spell-attribute">DC: {dc}</p>}
+                        {healing && <p className="spell-attribute">Healing: {healing}</p>}
                         {damageType !== undefined + " " + undefined && damageType !== null &&
                             <p className="spell-attribute">Damage: {damageType}</p>}
                     </div>
