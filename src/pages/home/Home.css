@@ -1,28 +1,3 @@
-/* ------------ Reusables ---------------- */
-
-.page-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-grow: 0;
-    flex-shrink: 1;
-}
-
-.outer-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    max-width: 1200px;
-    flex-grow: 0;
-    flex-shrink: 1;
-    background-color: transparent;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
 
 /* ------------------ logo ------------------ */
 .logo-wrapper-large {

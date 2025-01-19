@@ -1,8 +1,8 @@
 .spell-details-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 600px;
+    justify-content: start;
+    height: fit-content;
     max-width: 800px;
     background-color: var(--parchment);
     color: var(--ink);
@@ -32,6 +32,17 @@
     font-size: 18px;
 }
 
+.spell-description-container {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .spell-description {
-    font-size: 24px;
+    font-size: 20px;
+}
+
+.spell-description+.spell-description {
+    margin: 0.5em 0;
 }

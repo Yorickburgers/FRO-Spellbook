@@ -9,10 +9,8 @@ function SpellPage() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-
     useEffect(() => {
         const controller = new AbortController();
-
 
         async function getSpells() {
             try {
@@ -51,7 +49,7 @@ function SpellPage() {
     const range = spellDetails?.range || null;
     const attack = spellDetails?.attack_type || null;
     const description = Array.isArray(spellDetails?.desc)
-        ? spellDetails.desc.map((desc, index) => <p key={index} className="spell-description">{desc}</p>)
+        ? spellDetails.desc.map((desc, index) => (<p key={index} className="spell-description">{desc}</p>))
         : <p className="spell-description">{spellDetails?.desc || null}</p>;
     const upcast = spellDetails?.higher_level?.length > 0 ? spellDetails?.higher_level : null;
     const duration = spellDetails?.duration || null;
@@ -74,10 +72,10 @@ function SpellPage() {
                 <p className="spell-attribute">Range: {range}</p>
                 {attack && <p className="spell-attribute">Attack: {attack}</p>}
                 {dc && <p className="spell-attribute">DC: {dc}</p>}
-                {damageType !== undefined + " " + undefined && <p className="spell-attribute">Damage: {damageType}</p>}
+                {damageType !== undefined + " " + undefined && damageType !== null && <p className="spell-attribute">Damage: {damageType}</p>}
             </div>
-            {description}
-            {upcast && <p className="spell-description">Upcast: {upcast}</p>}
+            <div className="spell-description-container">{description}
+            {upcast && <p className="spell-description">Upcast: {upcast}</p>}</div>
         </div>
         <div></div>
     </div>
