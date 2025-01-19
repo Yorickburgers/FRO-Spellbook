@@ -63,10 +63,7 @@ function SpellPage() {
                 <div className="hide-bar">hide</div>
                 <div className="spell-details-container" id="print">
                     <div className="spell-name-container">
-                        <button
-                            type="button"
-                            className="fav-button"
-                        >This will be a star</button>
+                        <span className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</span>
                         <h1 className="spell-name">{spellDetails.name}</h1>
                         <button
                             type="button"

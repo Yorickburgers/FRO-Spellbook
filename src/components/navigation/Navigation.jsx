@@ -23,7 +23,7 @@ function Navigation() {
             </div>
             <div className="outer-nav-container">
                 <NavLink className="navLink" to="/">Home</NavLink>
-                <NavLink className="navLink" to="/spells">All spells</NavLink>
+                <NavLink className="navLink" to="/spells">Catalogue</NavLink>
                 <NavLink className="navLink" to="/favourites">Favourites</NavLink>
                 <input placeholder='for example "wish"' className="accountInput" type="text" name="searchTerm"/>
                 <Button
