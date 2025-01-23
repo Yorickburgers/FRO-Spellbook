@@ -1,21 +1,14 @@
 import './Navigation.css';
 import logo from "/src/assets/spellbook-logo.png";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Button from "../button/Button.jsx";
 import {useState} from "react";
 
 function Navigation() {
-    const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("");
 
     function searchHandler(e) {
         setSearchValue(e.target.value);
-    }
-
-    function handleSearchClick() {
-        if (searchValue) {
-            navigate(`spells/search/${searchValue}`)
-        }
     }
 
     return (

@@ -18,6 +18,7 @@ function SearchResults() {
                 const response = await axios.get(`https://www.dnd5eapi.co/api/spells`, {
                     signal: controller.signal,
                 });
+                console.log(response.data);
                 setAllSpells(response.data.results);
             } catch (e) {
                 console.error(e);
@@ -35,9 +36,10 @@ function SearchResults() {
 
     useEffect(() => {
         const filteredSpells = allSpells.filter((spell) => {
-            return !!spell.name.includes(`${searchTerm}`);
+            return !!spell.name.toLowerCase().includes(searchTerm.toLowerCase());
         });
         setFilteredSpells(filteredSpells);
+        console.log(searchTerm)
     }, [allSpells, searchTerm]);
 
     if (loading) {
@@ -47,8 +49,7 @@ function SearchResults() {
     return (
 <>
     <main className="page-container">
-        <h1 className="page-title">Search results for ~ {searchTerm} ~</h1>
-        <h2 className="search-results-count">Er zijn {filteredSpells.length} </h2>
+        <h1 className="page-title">{filteredSpells.length} search results for - {searchTerm} -</h1>
         <ul className="search-results-container">
             {filteredSpells.map((spell) => (
                 <SearchResult
