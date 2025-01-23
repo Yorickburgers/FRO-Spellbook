@@ -2,38 +2,108 @@ import './Navigation.css';
 import logo from "/src/assets/spellbook-logo.png";
 import {NavLink, useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import handleFocus from "../../helpers/handleFocus.js";
+import handleBlur from "../../helpers/handleBlur.js";
 
 function Navigation() {
     const navigate = useNavigate();
+    const [searchValue, setSearchValue] = useState("");
+    const [allSpells, setAllSpells] = useState([]);
+    const [filteredSpells, setFilteredSpells] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [inputFocused, setInputFocused] = useState(false);
 
-    function clickHandler(e, link) {
-        e.preventDefault();
-        navigate(link);
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function getSpells() {
+            try {
+                const response = await axios.get(`https://www.dnd5eapi.co/api/spells`, {
+                    signal: controller.signal,
+                });
+                setAllSpells(response.data.results);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        getSpells();
+
+        return function cleanup() {
+            controller.abort();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (searchValue) {
+            const filtered = allSpells.filter(spell =>
+                spell.name.toLowerCase().includes(searchValue.toLowerCase())
+            );
+            setFilteredSpells(filtered);
+        } else {
+            setFilteredSpells([]);
+        }
+    }, [searchValue, allSpells]);
+
+    function searchHandler(e) {
+        setSearchValue(e.target.value);
+    }
+
+    function handleSuggestionClick(spell) {
+        setSearchValue(spell.name);
+        navigate(`/spells/${spell.index}`);
     }
 
     return (
         <nav>
-            <div className="outer-nav-container">
+            <section className="outer-nav-container">
             <span className="logo-wrapper">
                 <a href="/">
                     <img src={logo} alt="spellbook icon"/>
                     <h1 className="logoName">Spellbook</h1>
                 </a>
             </span>
-            </div>
-            <div className="outer-nav-container">
+            </section>
+            <section className="outer-nav-container center">
                 <NavLink className="navLink" to="/">Home</NavLink>
                 <NavLink className="navLink" to="/spells">Catalogue</NavLink>
                 <NavLink className="navLink" to="/favourites">Favourites</NavLink>
-                <input placeholder='for example "wish"' className="accountInput" type="text" name="searchTerm"/>
+                <input
+                    placeholder='for example "wish"'
+                    className="accountInput"
+                    type="text"
+                    name="searchTerm"
+                    value={searchValue}
+                    onChange={searchHandler}
+                    onFocus={() => handleFocus(setInputFocused)}
+                    onBlur={() => handleBlur(setInputFocused)}
+                />
                 <Button
                     text="Zoek"
-                    link="/spells"
+                    link={`/spells/search/${searchValue}`}
                 />
-            </div>
-            <div className="outer-nav-container">
+                {inputFocused && filteredSpells.length > 0 && (
+                    <div className="suggestions-list">
+                        {loading && <p>loading...</p>}
+                        {filteredSpells.map((spell) => (
+                            <div
+                                key={spell.index}
+                                className="suggestion-item"
+                                onClick={() => handleSuggestionClick(spell)}
+                            >
+                                {spell.name}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
+            <section className="outer-nav-container">
                 <NavLink className="navLink-account" to="/login">Login</NavLink>
-            </div>
+            </section>
         </nav>
     );
 }

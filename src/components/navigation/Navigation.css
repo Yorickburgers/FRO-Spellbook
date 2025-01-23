@@ -21,7 +21,10 @@ nav {
     background-color: var(--purple);
 }
 
-.input-container,
+.center {
+    position: relative;
+}
+
 .navLink {
     background-color: var(--purple);
 }
@@ -40,7 +43,7 @@ nav {
 .navLink::after {
     display: block;
     content: "";
-    width: 0%;
+    width: 0;
     height: 1px;
     background-color: var(--coral);
     opacity: 50%;
@@ -111,4 +114,28 @@ nav {
 .accountInput:focus {
     border: solid 1px var(--coral);
     outline: none;
+    position: relative;
+}
+
+/* ------------- Suggestions --------- */
+
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    right: 60px;
+    min-width: 40%;
+    background-color: var(--parchment);
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: var(--lightparchment);
 }
