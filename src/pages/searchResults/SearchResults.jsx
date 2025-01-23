@@ -1,14 +1,14 @@
 import './SearchResults.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import SearchResult from "../../components/searchResult/SearchResult.jsx";
 
 function SearchResults() {
     const [loading, setLoading] = useState(true);
     const [allSpells, setAllSpells] = useState([]);
     const [filteredSpells, setFilteredSpells] = useState([]);
-    const {searchTerm} = useParams();
+    const { searchTerm } = useParams();
 
     useEffect(() => {
         const controller = new AbortController();

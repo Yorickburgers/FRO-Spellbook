@@ -8,11 +8,6 @@ function Navigation() {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("");
 
-    function clickHandler(e, link) {
-        e.preventDefault();
-        navigate(link);
-    }
-
     function searchHandler(e) {
         setSearchValue(e.target.value);
     }
@@ -40,7 +35,7 @@ function Navigation() {
                 <input placeholder='for example "wish"' className="accountInput" type="text" name="searchTerm" value={searchValue} onChange={searchHandler}/>
                 <Button
                     text="Zoek"
-                    onClick={handleSearchClick}
+                    link={`/spells/search/${searchValue}`}
                 />
             </section>
             <section className="outer-nav-container">
