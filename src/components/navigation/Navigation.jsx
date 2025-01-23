@@ -55,7 +55,7 @@ function Navigation() {
 
     function handleSuggestionClick(spell) {
         setSearchValue(spell.name);
-        navigate(`/spells/search/${spell.index}`);
+        navigate(`/spells/${spell.index}`);
     }
 
     return (
