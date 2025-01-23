@@ -51,13 +51,12 @@ function Home() {
                     <h2>Search a spell</h2>
                     <p>Have you read about an amazing new spell, or is someone at your table casting a spell that you
                         forgot
-                        the details about? Look for it here by typing the spell name or a keyword.</p>
-                    <div><input placeholder='for example "wish"' className="accountInput" type="text"
-                                name="searchTerm" value={searchValue} onChange={searchHandler}/>
+                        the details about? Look for it here by typing the spell name or a keyword in the search bar at the top of your screen.</p>
+                    <p>Choose one of the suggestions or press the button to search for your own search term. </p>
                         <Button
                             text="Search"
                             onClick={handleSearchClick}
-                        /></div>
+                        />
                 </article>
                 <article className="function-box">
                     <h2>Favourites</h2>
