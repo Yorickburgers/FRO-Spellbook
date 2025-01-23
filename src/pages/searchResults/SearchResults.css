@@ -1,0 +1,11 @@
+.page-container.search-results {
+    justify-content: start;
+}
+
+.search-results-container {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    flex-shrink: 1;
+    margin-top: 60px;
+}

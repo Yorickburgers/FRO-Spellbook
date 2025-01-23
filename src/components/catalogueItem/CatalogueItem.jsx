@@ -31,7 +31,6 @@ function CatalogueItem({index, name, url}) {
         }
     }, [url]);
 
-    console.log(spellDetails)
     if (loading) {
         return <div>Loading...</div>;
     }
