@@ -59,7 +59,7 @@ function SearchResults() {
                 />
             ))}
                 {filteredSpells.length === 0 &&
-                    <li className="search-result">You are out of luck... no such spell exists.</li>}
+                    <li className="search-result none">You are out of luck... no such spell exists.</li>}
         </ul>
     </main>
 </>
