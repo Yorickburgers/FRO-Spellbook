@@ -50,14 +50,16 @@ function SearchResults() {
 <>
     <main className="page-container search-results">
         <h1 className="page-title">{filteredSpells.length} search results for - {searchTerm} -</h1>
-        <ul className="search-results-container">
-            {filteredSpells.map((spell) => (
+            <ul className="search-results-container">
+            {filteredSpells.length >= 2 && filteredSpells.map((spell) => (
                 <SearchResult
                     name={spell.name}
                     index={spell.index}
                     key={spell.index}
                 />
             ))}
+                {filteredSpells.length === 0 &&
+                    <li className="search-result">You are out of luck... no such spell exists.</li>}
         </ul>
     </main>
 </>
