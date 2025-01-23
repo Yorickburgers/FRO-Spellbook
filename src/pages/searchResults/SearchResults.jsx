@@ -42,7 +42,18 @@ function SearchResults() {
 
     return (
 <>
-
+    <main className="page-container">
+        <h1 className="page-title">Search results for ~ {searchTerm} ~</h1>
+        <ul className="search-results-container">
+            {filteredSpells.map((spell) => (
+                <SearchResult
+                    name={spell.name}
+                    index={spell.index}
+                    key={spell.index}
+                />
+            ))}
+        </ul>
+    </main>
 </>
 );
 }
