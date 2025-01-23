@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/spells" element={<Catalogue/>}/>
           <Route path="/favourites" />
-          <Route path="/search" />
+          <Route path="/spells/search/:searchTerm" />
           <Route path="/login" />
           <Route path="*" element={<NotFound/>}/>
           <Route path="/spells/:id" element={<SpellPage/>}/>
