@@ -2,15 +2,26 @@ import './Navigation.css';
 import logo from "/src/assets/spellbook-logo.png";
 import {NavLink, useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
+import {useEffect, useState} from "react";
 
 function Navigation() {
     const navigate = useNavigate();
+    const [searchValue, setSearchValue] = useState("");
 
     function clickHandler(e, link) {
         e.preventDefault();
         navigate(link);
     }
 
+    function searchHandler(e) {
+        setSearchValue(e.target.value);
+    }
+
+    function handleSearchClick() {
+        if (searchValue) {
+            navigate()
+        }
+    }
     return (
         <nav>
             <div className="outer-nav-container">
@@ -25,7 +36,7 @@ function Navigation() {
                 <NavLink className="navLink" to="/">Home</NavLink>
                 <NavLink className="navLink" to="/spells">Catalogue</NavLink>
                 <NavLink className="navLink" to="/favourites">Favourites</NavLink>
-                <input placeholder='for example "wish"' className="accountInput" type="text" name="searchTerm"/>
+                <input placeholder='for example "wish"' className="accountInput" type="text" name="searchTerm" value={searchValue} onChange={searchHandler}/>
                 <Button
                     text="Zoek"
                     link="/spells"
