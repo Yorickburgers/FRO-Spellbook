@@ -1,10 +1,11 @@
 import './SearchResults.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import SearchResult from "../../components/searchResult/SearchResult.jsx";
 
 function SearchResults() {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [allSpells, setAllSpells] = useState([]);
     const [filteredSpells, setFilteredSpells] = useState([]);
@@ -18,7 +19,6 @@ function SearchResults() {
                 const response = await axios.get(`https://www.dnd5eapi.co/api/spells`, {
                     signal: controller.signal,
                 });
-                console.log(response.data);
                 setAllSpells(response.data.results);
             } catch (e) {
                 console.error(e);
@@ -39,7 +39,7 @@ function SearchResults() {
             return !!spell.name.toLowerCase().includes(searchTerm.toLowerCase());
         });
         setFilteredSpells(filteredSpells);
-        console.log(searchTerm)
+        filteredSpells.length === 1 && navigate(`/spells/${filteredSpells[0].index}`)
     }, [allSpells, searchTerm]);
 
     if (loading) {
