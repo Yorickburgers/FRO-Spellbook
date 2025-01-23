@@ -40,11 +40,15 @@ function SearchResults() {
         setFilteredSpells(filteredSpells);
     }, [allSpells, searchTerm]);
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
 <>
     <main className="page-container">
         <h1 className="page-title">Search results for ~ {searchTerm} ~</h1>
+        <h2 className="search-results-count">Er zijn {filteredSpells.length} </h2>
         <ul className="search-results-container">
             {filteredSpells.map((spell) => (
                 <SearchResult
