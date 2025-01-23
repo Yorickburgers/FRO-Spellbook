@@ -48,7 +48,7 @@ function SearchResults() {
 
     return (
 <>
-    <main className="page-container">
+    <main className="page-container search-results">
         <h1 className="page-title">{filteredSpells.length} search results for - {searchTerm} -</h1>
         <ul className="search-results-container">
             {filteredSpells.map((spell) => (
