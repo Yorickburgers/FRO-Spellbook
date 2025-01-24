@@ -1,0 +1,31 @@
+.filter-label::first-letter {
+    text-transform: capitalize;
+}
+
+.filter-content {
+    display: none;
+    overflow: hidden;
+}
+
+.filter-collapse-button {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.filter-collapse-button {
+    content: '\02795';
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.filter-collapse-button.active {
+    content: "\2796";
+}

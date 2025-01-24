@@ -3,6 +3,7 @@ import SortButton from "../../components/sortButton/SortButton.jsx";
 import CatalogueItem from "../../components/catalogueItem/CatalogueItem.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import CollapsableListItem from "../../components/collapsableListItem/CollapsableListItem.jsx";
 
 function Catalogue() {
     const [spells, setSpells] = useState([]);
@@ -43,7 +44,8 @@ function Catalogue() {
                 <div className="spell-outer-container">
                     <section className="filters-container"><h2>Filters</h2>
                     <ul className="filters">
-                        <li className="filter-list-item">Level</li>
+                        <CollapsableListItem
+                            name="level"><label className="filter-label" htmlFor="level"><input type="checkbox"/>Cantrip</label></CollapsableListItem>
                         <li className="filter-list-item">Duration</li>
                         <li className="filter-list-item">Components</li>
                         <li className="filter-list-item">Classes</li>
