@@ -1,7 +1,12 @@
 import './CollapsableListItem.css';
+import {useState} from "react";
 
 function CollapsableListItem({name, children}) {
-return (
+const [isActive, setIsActive] = useState(false);
+const toggleCollapse = () => setIsActive(!isActive);
+const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+
+    return (
     <>
         <li className="filter-list-item">
             <label htmlFor={name}>
@@ -9,13 +14,14 @@ return (
                 className="filter-collapse-button"
                 type="button"
                 name={name}
-            />
-            {name}
+                onClick={toggleCollapse}
+                >{isActive ? "-" : "+"}</button>
+                {capitalizedName}
             </label>
         </li>
-        <div className="filter-content">
+        <ul className={`filter-content ${isActive ? 'active' : ''}`}>
             {children}
-        </div>
+        </ul>
     </>
 );
 }

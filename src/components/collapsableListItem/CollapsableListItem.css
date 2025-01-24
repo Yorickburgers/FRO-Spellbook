@@ -1,31 +1,34 @@
-.filter-label::first-letter {
-    text-transform: capitalize;
-}
-
 .filter-content {
     display: none;
     overflow: hidden;
 }
 
+.filter-content.active {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 12px;
+    width: calc(100% - 12px);
+    border: solid 1px black;
+    margin-left: 12px;
+}
+
 .filter-collapse-button {
-    background-color: #eee;
-    color: #444;
+    background-color: transparent;
+    font-size: 20px;
+    margin: 0 5px;
     cursor: pointer;
-    padding: 18px;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    color: var(--ink);
 }
 
-.filter-collapse-button {
-    content: '\02795';
-    font-size: 13px;
-    color: white;
-    float: right;
-    margin-left: 5px;
+.filter-option {
+    list-style: none;
 }
 
-.filter-collapse-button.active {
-    content: "\2796";
+.filter-option-checkbox {
+    margin-right: 6px;
 }

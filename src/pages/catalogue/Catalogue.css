@@ -34,7 +34,16 @@
     align-items: center;
     border-radius: 30px;
     margin-top: 60px;
-    max-width: 1200px;
+    max-width: 360px;
+    padding: 20px;
+    color: var(--ink);
+}
+
+.filters {
+    margin-top: 30px;
+    list-style: none;
+    line-height: 1.5;
+    width: 100%;
 }
 
 .catalogue-list {
@@ -42,7 +51,6 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 60px;
-    overflow-y: scroll;
     background-color: var(--lightparchment);
 }
 
