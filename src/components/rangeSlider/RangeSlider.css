@@ -1,0 +1,46 @@
+.range-slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-left: 12px;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 24px;
+    margin: 12px 0;
+}
+
+.slider-label {
+    max-width: 80%;
+}
+
+.slider input[type="range"] {
+    width: 100%;
+    height: 10px;
+    background: var(--lightparchment);
+    appearance: none;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.slider-max {
+    position: absolute;
+    top: 24px;
+    left: 0;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.inputs input[type="number"] {
+    max-width: 45%;
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 5px;
+}

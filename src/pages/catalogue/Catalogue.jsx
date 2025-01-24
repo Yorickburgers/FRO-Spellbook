@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CollapsableListItem from "../../components/collapsableListItem/CollapsableListItem.jsx";
 import FilterOption from "../../components/filterOption/FilterOption.jsx";
+import RangeSlider from "../../components/rangeSlider/RangeSlider.jsx";
 
 function Catalogue() {
     const [spells, setSpells] = useState([]);
@@ -58,6 +59,22 @@ function Catalogue() {
                             <FilterOption type="checkbox" option="9th"/>
                         </CollapsableListItem>
                         <CollapsableListItem
+                            name="damage-type">
+                            <FilterOption type="checkbox" option="Acid"/>
+                            <FilterOption type="checkbox" option="Bludgeoning"/>
+                            <FilterOption type="checkbox" option="Cold"/>
+                            <FilterOption type="checkbox" option="Fire"/>
+                            <FilterOption type="checkbox" option="Force"/>
+                            <FilterOption type="checkbox" option="Lightning"/>
+                            <FilterOption type="checkbox" option="Necrotic"/>
+                            <FilterOption type="checkbox" option="Piercing"/>
+                            <FilterOption type="checkbox" option="Poison"/>
+                            <FilterOption type="checkbox" option="Psychic"/>
+                            <FilterOption type="checkbox" option="Radiant"/>
+                            <FilterOption type="checkbox" option="Slashing"/>
+                            <FilterOption type="checkbox" option="Thunder"/>
+                        </CollapsableListItem>
+                        <CollapsableListItem
                             name="components">
                             <FilterOption type="checkbox" option="Non-verbal"/>
                             <FilterOption type="checkbox" option="Not somatic"/>
@@ -83,13 +100,21 @@ function Catalogue() {
                         </CollapsableListItem>
                         <CollapsableListItem
                             name="range">
-                            <input type="range" min="0/Self" max="600"></input>
+                            <RangeSlider/>
                         </CollapsableListItem>
                         <CollapsableListItem
                             name="attack">
+                            <FilterOption type="checkbox" option="Ranged"/>
+                            <FilterOption type="checkbox" option="Melee"/>
                         </CollapsableListItem>
                         <CollapsableListItem
                             name="dc-type">
+                            <FilterOption type="checkbox" option="CON"/>
+                            <FilterOption type="checkbox" option="STR"/>
+                            <FilterOption type="checkbox" option="DEX"/>
+                            <FilterOption type="checkbox" option="WIS"/>
+                            <FilterOption type="checkbox" option="INT"/>
+                            <FilterOption type="checkbox" option="CHA"/>
                         </CollapsableListItem>
 
                         <li className="filter-list-item"><label htmlFor="includes-input">Includes: <input
