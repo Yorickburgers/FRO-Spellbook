@@ -41,7 +41,19 @@ function Catalogue() {
             <main className="page-container">
                 <h1 className="page-title">Catalogue</h1>
                 <div className="spell-outer-container">
-                    <div className="filters">filters</div>
+                    <section className="filters-container"><h2>Filters</h2>
+                    <ul className="filters">
+                        <li className="filter-list-item">Level</li>
+                        <li className="filter-list-item">Duration</li>
+                        <li className="filter-list-item">Components</li>
+                        <li className="filter-list-item">Classes</li>
+                        <li className="filter-list-item">Casting time</li>
+                        <li className="filter-list-item">Range</li>
+                        <li className="filter-list-item">Attack</li>
+                        <li className="filter-list-item">DC-type</li>
+                        <li className="filter-list-item"><label htmlFor="includes-input">Includes: <input name="includes-input" type="text"/></label></li>
+                    </ul>
+                    </section>
                     <div className="catalogue">
                         <div className="sorting-tags-container">
                             <SortButton
