@@ -4,7 +4,7 @@ import CollapsableListItem from "../collapsableListItem/CollapsableListItem.jsx"
 import FilterOption from "../filterOption/FilterOption.jsx";
 import RangeSlider from "../rangeSlider/RangeSlider.jsx";
 
-function FilterTab({tabOpen, setTabOpen}) {
+function FilterTab({tabOpen, setTabOpen, filters, toggleFilters}) {
 
     return (
     <>
@@ -14,74 +14,92 @@ function FilterTab({tabOpen, setTabOpen}) {
             <ul className="filters">
                 <CollapsableListItem
                     name="level">
-                    <FilterOption type="checkbox" option="Cantrip"/>
-                    <FilterOption type="checkbox" option="1st"/>
-                    <FilterOption type="checkbox" option="2nd"/>
-                    <FilterOption type="checkbox" option="3rd"/>
-                    <FilterOption type="checkbox" option="4th"/>
-                    <FilterOption type="checkbox" option="5th"/>
-                    <FilterOption type="checkbox" option="6th"/>
-                    <FilterOption type="checkbox" option="7th"/>
-                    <FilterOption type="checkbox" option="8th"/>
-                    <FilterOption type="checkbox" option="9th"/>
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(level => (
+                        <FilterOption
+                            key={level}
+                            type="checkbox"
+                            option={level}
+                            category="level"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="type">
-                    <FilterOption type="checkbox" option="Acid"/>
-                    <FilterOption type="checkbox" option="Bludgeoning"/>
-                    <FilterOption type="checkbox" option="Cold"/>
-                    <FilterOption type="checkbox" option="Fire"/>
-                    <FilterOption type="checkbox" option="Force"/>
-                    <FilterOption type="checkbox" option="Lightning"/>
-                    <FilterOption type="checkbox" option="Necrotic"/>
-                    <FilterOption type="checkbox" option="Piercing"/>
-                    <FilterOption type="checkbox" option="Poison"/>
-                    <FilterOption type="checkbox" option="Psychic"/>
-                    <FilterOption type="checkbox" option="Radiant"/>
-                    <FilterOption type="checkbox" option="Slashing"/>
-                    <FilterOption type="checkbox" option="Thunder"/>
+                <CollapsableListItem name="type">
+                    {["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison", "psychic", "radiant", "slashing", "thunder"].map(type => (
+                        <FilterOption
+                            key={type}
+                            type="checkbox"
+                            option={type}
+                            category="type"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="components">
-                    <FilterOption type="checkbox" option="Non-verbal"/>
-                    <FilterOption type="checkbox" option="Not somatic"/>
-                    <FilterOption type="checkbox" option="No materials"/>
+                <CollapsableListItem name="components">
+                    {["excludeVerbal", "excludeSomatic", "excludeMaterial"].map(component => (
+                        <FilterOption
+                            key={component}
+                            type="checkbox"
+                            option={component}
+                            category="components"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="classes">
-                    <FilterOption type="checkbox" option="Bard"/>
-                    <FilterOption type="checkbox" option="Cleric"/>
-                    <FilterOption type="checkbox" option="Druid"/>
-                    <FilterOption type="checkbox" option="Paladin"/>
-                    <FilterOption type="checkbox" option="Ranger"/>
-                    <FilterOption type="checkbox" option="Sorcerer"/>
-                    <FilterOption type="checkbox" option="Warlock"/>
-                    <FilterOption type="checkbox" option="Wizard"/>
+                <CollapsableListItem name="classes">
+                    {["bard", "cleric", "druid", "paladin", "ranger", "sorcerer", "warlock", "wizard"].map(charClass => (
+                        <FilterOption
+                            key={charClass}
+                            type="checkbox"
+                            option={charClass}
+                            category="classes"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="casting-time">
-                    <FilterOption type="checkbox" option="1 Action"/>
-                    <FilterOption type="checkbox" option="1 Bonus Action"/>
-                    <FilterOption type="checkbox" option="1 Reaction"/>
-                    <FilterOption type="checkbox" option="1 minute or longer"/>
+                <CollapsableListItem name="casting-time">
+                    {["action", "bonusAction", "reaction", "timed"].map(time => (
+                        <FilterOption
+                            key={time}
+                            type="checkbox"
+                            option={time}
+                            category="casting-time"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
                 <CollapsableListItem
                     name="range">
                     <RangeSlider/>
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="attack">
-                    <FilterOption type="checkbox" option="Ranged"/>
-                    <FilterOption type="checkbox" option="Melee"/>
+                <CollapsableListItem name="attack">
+                    {["ranged", "melee"].map(attack => (
+                        <FilterOption
+                            key={attack}
+                            type="checkbox"
+                            option={attack}
+                            category="attack"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="dc-type">
-                    <FilterOption type="checkbox" option="CON"/>
-                    <FilterOption type="checkbox" option="STR"/>
-                    <FilterOption type="checkbox" option="DEX"/>
-                    <FilterOption type="checkbox" option="WIS"/>
-                    <FilterOption type="checkbox" option="INT"/>
-                    <FilterOption type="checkbox" option="CHA"/>
+                <CollapsableListItem name="dc-type">
+                    {["cha", "con", "dex", "int", "str", "wis"].map(attribute => (
+                        <FilterOption
+                            key={attribute}
+                            type="checkbox"
+                            option={attribute}
+                            category="dcType"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
 
                 <li className="filter-list-item"><label htmlFor="includes-input">Includes: <input

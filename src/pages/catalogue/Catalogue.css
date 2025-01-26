@@ -11,6 +11,10 @@
     max-width: 1200px;
 }
 
+.catalogue-container {
+    justify-content: start;
+}
+
 .sorting-tags-container {
     display: flex;
     flex-direction: row;

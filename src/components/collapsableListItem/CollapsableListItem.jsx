@@ -15,8 +15,7 @@ const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
                 type="button"
                 name={name}
                 onClick={toggleCollapse}
-                >{isActive ? "-" : "+"}</button>
-                {capitalizedName}
+                >{isActive ? "-" : "+"} {capitalizedName}</button>
             </label>
         </li>
         <ul className={`filter-content ${isActive ? 'active' : ''}`}>
