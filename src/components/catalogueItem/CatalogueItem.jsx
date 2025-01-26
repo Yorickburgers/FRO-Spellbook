@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
 
-function CatalogueItem({index, name, url, filters}) {
+function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
     const [spellDetails, setSpellDetails] = useState({});
     const [loading, setLoading] = useState(true);
     const [isRendered, setIsRendered] = useState(true);
@@ -33,7 +33,7 @@ function CatalogueItem({index, name, url, filters}) {
     }, [url]);
 
     useEffect(() => {
-        if (spellDetails) {
+        if (Object.keys(spellDetails).length > 0) {
             const isCategoryFiltered = (category, filters) => Object.values(filters[category]).includes(true);
 
             const levelMatch = !isCategoryFiltered("level", filters) || filters.level[spellDetails.level] || false;
@@ -48,13 +48,19 @@ function CatalogueItem({index, name, url, filters}) {
         }
     }, [filters, spellDetails]);
 
+    useEffect(() => {
+        if (isRendered) {
+            handleSpellDetails(spellDetails);
+        }
+    }, [isRendered, spellDetails, handleSpellDetails]);
+
     if (loading) {
         return <div>Loading...</div>;
     }
 
     if (!isRendered) {
         return null;
-    }
+    } else {
     const classes = spellDetails.classes
         ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
         : " ";
@@ -74,7 +80,7 @@ function CatalogueItem({index, name, url, filters}) {
                 <p className="catalogue-range">{range}</p>
             </li>
         </NavLink>
-    );
+    )}
 }
 
 export default CatalogueItem;

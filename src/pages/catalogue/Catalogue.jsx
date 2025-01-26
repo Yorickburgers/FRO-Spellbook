@@ -83,6 +83,7 @@ function Catalogue() {
         },
         includes: ""
     })
+    const [renderedSpells, setRenderedSpells] = useState([]);
 
 
 
@@ -108,6 +109,26 @@ function Catalogue() {
             controller.abort();
         }
     }, []);
+
+    const handleSpellDetails = (spellDetails) => {
+        setRenderedSpells((prevState) => {
+            if (Object.keys(spellDetails).length === 0) {
+                return prevState;
+            }
+            if (!prevState.some((spell) => spell.index === spellDetails.index)) {
+                return [...prevState, spellDetails];
+            }
+            return prevState;
+        });
+    };
+
+    useEffect(() => {
+        console.log(renderedSpells);
+    }, [renderedSpells]);
+
+    useEffect(() => {
+        setRenderedSpells([]);
+    }, [filters]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -163,6 +184,7 @@ function Catalogue() {
                                 url={spell.url}
                                 key={spell.index}
                                 filters={filters}
+                                handleSpellDetails={handleSpellDetails}
                             />
                         ))}
                     </ul>

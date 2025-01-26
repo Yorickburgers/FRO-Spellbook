@@ -1,14 +1,15 @@
 .catalogue {
     display: flex;
     flex-direction: column;
-    height: 100%;
     background-color: var(--parchment);
     flex-grow: 0;
     flex-shrink: 1;
     align-items: center;
     border-radius: 30px;
     margin-top: 60px;
+    margin-bottom: 60px;
     max-width: 1200px;
+    height: auto;
 }
 
 .catalogue-container {
@@ -30,7 +31,7 @@
     flex-direction: column;
     width: 100%;
     background-color: var(--lightparchment);
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 

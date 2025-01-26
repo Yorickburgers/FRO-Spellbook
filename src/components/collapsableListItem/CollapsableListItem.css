@@ -4,13 +4,13 @@
 }
 
 .filter-content.active {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    column-gap: 12px;
-    width: calc(100% - 12px);
+    column-gap: 5px;
+    width: calc(100%);
     margin-left: 12px;
+    display: grid;
+    text-align: start;
+    grid-template-columns: repeat(auto-fill, minmax(10%, 27%));
+    overflow: clip;
 }
 
 .filter-collapse-button {
@@ -26,8 +26,18 @@
 
 .filter-option {
     list-style: none;
+    text-align: start;
+    min-width: 10%;
+    max-width: 100%;
+    grid-column: span 1;
+    max-height: 25px;
+    font-size: 15px;
 }
+
 
 .filter-option-checkbox {
     margin-right: 6px;
 }
+
+
+
