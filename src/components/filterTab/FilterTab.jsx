@@ -2,10 +2,15 @@ import './FilterTab.css';
 import {handleTab} from "../../helpers/handleTab.js";
 import CollapsableListItem from "../collapsableListItem/CollapsableListItem.jsx";
 import FilterOption from "../filterOption/FilterOption.jsx";
-import RangeSlider from "../rangeSlider/RangeSlider.jsx";
 
 function FilterTab({tabOpen, setTabOpen, filters, toggleFilters}) {
-
+function handleChange(e) {
+    e.preventDefault();
+    toggleFilters({
+        ...filters,
+            includes: e.target.value,
+    });
+}
     return (
     <>
         <section className={`filters-container${tabOpen ? " open" : ""}`}>
@@ -26,24 +31,12 @@ function FilterTab({tabOpen, setTabOpen, filters, toggleFilters}) {
                     ))}
                 </CollapsableListItem>
                 <CollapsableListItem name="type">
-                    {["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison", "psychic", "radiant", "slashing", "thunder"].map(type => (
+                    {["acid", "bludgeoning", "cold", "fire", "force", "healing", "lightning", "necrotic", "piercing", "poison", "psychic", "radiant", "slashing", "thunder"].map(type => (
                         <FilterOption
                             key={type}
                             type="checkbox"
                             option={type}
                             category="type"
-                            filters={filters}
-                            toggleFilters={toggleFilters}
-                        />
-                    ))}
-                </CollapsableListItem>
-                <CollapsableListItem name="components">
-                    {["excludeVerbal", "excludeSomatic", "excludeMaterial"].map(component => (
-                        <FilterOption
-                            key={component}
-                            type="checkbox"
-                            option={component}
-                            category="components"
                             filters={filters}
                             toggleFilters={toggleFilters}
                         />
@@ -61,21 +54,29 @@ function FilterTab({tabOpen, setTabOpen, filters, toggleFilters}) {
                         />
                     ))}
                 </CollapsableListItem>
-                <CollapsableListItem name="casting-time">
-                    {["action", "bonusAction", "reaction", "timed"].map(time => (
+                <CollapsableListItem name="casting time">
+                    {["action", "bonus action", "timed"].map(time => (
                         <FilterOption
                             key={time}
                             type="checkbox"
                             option={time}
-                            category="casting-time"
+                            category="castTime"
                             filters={filters}
                             toggleFilters={toggleFilters}
                         />
                     ))}
                 </CollapsableListItem>
-                <CollapsableListItem
-                    name="range">
-                    <RangeSlider/>
+                <CollapsableListItem name="range">
+                    {["touch", "self", "10 feet", "30 feet", "60 feet", "90 feet", "120 feet", "300 feet", "1 mile"].map(range => (
+                        <FilterOption
+                            key={range}
+                            type="checkbox"
+                            option={range}
+                            category="range"
+                            filters={filters}
+                            toggleFilters={toggleFilters}
+                        />
+                    ))}
                 </CollapsableListItem>
                 <CollapsableListItem name="attack">
                     {["ranged", "melee"].map(attack => (
@@ -103,7 +104,7 @@ function FilterTab({tabOpen, setTabOpen, filters, toggleFilters}) {
                 </CollapsableListItem>
 
                 <li className="filter-list-item"><label htmlFor="includes-input">Includes: <input
-                    className="accountInput" name="includes-input" type="text"/></label></li>
+                    className="accountInput" name="includes-input" type="text" value={filters.includes} onChange={handleChange}/></label></li>
             </ul>
         </section>
     </>

@@ -28,6 +28,7 @@ function Catalogue() {
             cold: false,
             fire: false,
             force: false,
+            healing: false,
             lightning: false,
             necrotic: false,
             piercing: false,
@@ -38,9 +39,9 @@ function Catalogue() {
             thunder: false,
         },
         components: {
-            excludeVerbal: false,
-            excludeSomatic: false,
-            excludeMaterial: false,
+            "exclude Verbal": false,
+            "exclude Somatic": false,
+            "exclude Material": false,
         },
         classes: {
             bard: false,
@@ -54,13 +55,19 @@ function Catalogue() {
         },
         castTime: {
             action: false,
-            bonusAction: false,
-            reaction: false,
+            "bonus action": false,
             timed: false,
         },
         range: {
-            min: 0,
-            max: 300,
+            touch: false,
+            self: false,
+            "10 feet": false,
+            "30 feet": false,
+            "60 feet": false,
+            "90 feet": false,
+            "120 feet": false,
+            "300 feet": false,
+            "1 mile": false,
         },
         attack: {
             melee: false,
@@ -76,7 +83,6 @@ function Catalogue() {
         },
         includes: ""
     })
-    const [filteredSpells, setFilteredSpells] = useState([]);
 
 
 
@@ -102,32 +108,6 @@ function Catalogue() {
             controller.abort();
         }
     }, []);
-
-    useEffect(() => {
-        const isCategoryFiltered = (category, filters) => Object.values(filters[category]).includes(true);
-
-        const filterSpells = (spells, filters) => {
-            return spells.filter(spell => {
-                const levelMatch = !isCategoryFiltered("level", filters) || filters.level[spell.level] || false;
-                const typeMatch = !isCategoryFiltered("type", filters) || filters.type[spell?.damage?.damage_type?.name.toLowerCase()] || false;
-                const classMatch = !isCategoryFiltered("classes", filters) || spell.classes?.some(cls => filters.classes[cls.name.toLowerCase()]) || false;
-                const attackMatch = !isCategoryFiltered("attack", filters) || filters.attack[spell.attack_type] || false;
-                const rangeMatch = !filters.range || (spell.range >= filters.range.min && spell.range <= filters.range.max);
-                const dcTypeMatch = !isCategoryFiltered("dcType", filters) || filters.dcType[spell?.dc.dc_type.index] || false;
-
-                return levelMatch && dcTypeMatch;
-            });
-        };
-
-        if (!loading) {
-            const newFilteredSpells = filterSpells(spells, filters);
-            setFilteredSpells(newFilteredSpells);
-        }
-
-        console.log(filters);
-    }, [spells, filters, loading]);
-
-
 
     if (loading) {
         return <div>Loading...</div>;
@@ -176,7 +156,7 @@ function Catalogue() {
                         />
                     </div>
                     <ul className="catalogue-list">
-                        {filteredSpells.map((spell) => (
+                        {spells.map((spell) => (
                             <CatalogueItem
                                 name={spell.name}
                                 index={spell.index}
@@ -185,7 +165,6 @@ function Catalogue() {
                                 filters={filters}
                             />
                         ))}
-                        {filteredSpells.length<1 && <p>No spells match your chosen filters...</p>}
                     </ul>
                 </div>
                 <div className={`position-dummy ${tabOpen ? "open" : ""}`}></div>
