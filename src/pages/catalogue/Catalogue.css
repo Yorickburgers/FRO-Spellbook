@@ -26,6 +26,21 @@
     top: 60px;
 }
 
+select.suggestions-list {
+    cursor: pointer;
+    position: absolute;
+    font-size: 16px;
+    top: -22px;
+    left: 240px;
+    max-width: 120px;
+    color: var(--ink);
+}
+
+.class-suggestion:hover {
+    cursor: pointer;
+    background-color: var(--lightparchment);
+}
+
 .catalogue-list {
     display: flex;
     flex-direction: column;
@@ -43,6 +58,7 @@
 
 .catalogue-classes {
     width: 180px;
+    position: relative;
 }
 
 .catalogue-damage {
