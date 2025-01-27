@@ -39,11 +39,6 @@ function Catalogue() {
             slashing: false,
             thunder: false,
         },
-        components: {
-            "exclude Verbal": false,
-            "exclude Somatic": false,
-            "exclude Material": false,
-        },
         classes: {
             bard: false,
             cleric: false,
@@ -85,6 +80,8 @@ function Catalogue() {
         includes: ""
     })
     const [renderedSpells, setRenderedSpells] = useState([]);
+    const [showClasses, setShowClasses] = useState(false);
+    const [selectedClass, setSelectedClass] = useState("")
 
 
 
@@ -136,17 +133,21 @@ function Catalogue() {
         setSortedSpells(sorted);
     };
 
-    const sortByClass = (chosenClass) => {
-        const sorted = [...renderedSpells].sort((a, b) => {
-            const canLearnA = a.classes?.some(cls => cls.name === chosenClass);
-            const canLearnB = b.classes?.some(cls => cls.name === chosenClass);
+    useEffect(() => {
+        const sortByClass = (selectedClass) => {
+            const sorted = [...renderedSpells].sort((a, b) => {
+                const canLearnA = a.classes?.some(cls => cls.name === selectedClass);
+                const canLearnB = b.classes?.some(cls => cls.name === selectedClass);
 
-            if (canLearnA && !canLearnB) return -1;
-            if (!canLearnA && canLearnB) return 1;
-            return 0;
-        });
-        setSortedSpells(sorted);
-    };
+                if (canLearnA && !canLearnB) return -1;
+                if (!canLearnA && canLearnB) return 1;
+                return 0;
+            });
+            setSortedSpells(sorted);
+        };
+        sortByClass(selectedClass)
+    }, [selectedClass]);
+
 
     const sortByDamageOrHealing = () => {
         const calculatePart = (part) => {
@@ -216,20 +217,21 @@ function Catalogue() {
         const sorted = [...renderedSpells].sort((a, b) => {
             const getCastingTimeIndex = (time) => {
                 switch (time) {
-                    case "reaction": return 0;
-                    case "bonus action": return 1;
-                    case "action": return 2;
+                    case "1 reaction": return 0;
+                    case "1 bonus action": return 1;
+                    case "1 action": return 2;
                     case "1 minute": return 3;
                     case "10 minutes": return 4;
                     case "1 hour": return 5;
                     case "8 hours": return 6;
+                    case "12 hours": return 6.5;
                     case "24 hours": return 7;
                     default: return 8;
                 }
             };
 
-            const timeA = a.casting_time || "action";
-            const timeB = b.casting_time || "action";
+            const timeA = a.casting_time || 8;
+            const timeB = b.casting_time || 8;
 
             return getCastingTimeIndex(timeA) - getCastingTimeIndex(timeB);
         });
@@ -268,6 +270,8 @@ function Catalogue() {
         setSortedSpells(sorted);
     };
 
+    const classOptions = ["Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Warlock", "Wizard"]
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -290,9 +294,24 @@ function Catalogue() {
                         />
                         <SortButton
                             text="Class"
-                            onClick={() => sortByClass("Wizard")}
+                            onClick={() => setShowClasses(!showClasses)}
                             className="catalogue-classes"
                         />
+                        {showClasses && (
+                            <select
+                                className="suggestions-list"
+                                value={selectedClass}
+                                onChange={(e) => {
+                                    setSelectedClass(e.target.value)
+                                    setShowClasses(!showClasses)}}
+                            >
+                                {classOptions.map((cls) => (
+                                    <option key={cls} value={cls} className="class-suggestion">
+                                        {cls}
+                                    </option>
+                                ))}
+                            </select>
+                        )}
                         <SortButton
                             text="Dam/Heal"
                             onClick={sortByDamageOrHealing}
