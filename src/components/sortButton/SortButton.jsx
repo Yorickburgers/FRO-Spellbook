@@ -1,11 +1,11 @@
 import './SortButton.css';
 
-function SortButton({text, sortStyle, className}) {
+function SortButton({text, onClick, className}) {
     return (
         <button
             type="button"
             className={`sorting-button ${className}`}
-            onClick={sortStyle}
+            onClick={onClick}
         >{text}
         </button>
     );
