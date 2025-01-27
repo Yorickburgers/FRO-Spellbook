@@ -1,19 +1,15 @@
 .catalogue {
     display: flex;
     flex-direction: column;
+    height: 100%;
     background-color: var(--parchment);
     flex-grow: 0;
     flex-shrink: 1;
     align-items: center;
     border-radius: 30px;
     margin-top: 60px;
-    margin-bottom: 60px;
     max-width: 1200px;
-    height: auto;
-}
-
-.catalogue-container {
-    justify-content: start;
+    margin-bottom: 60px;
 }
 
 .sorting-tags-container {
@@ -26,14 +22,27 @@
     top: 60px;
 }
 
+.filters {
+    display: flex;
+    align-self: start;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--parchment);
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 60px;
+    max-width: 1200px;
+}
+
 .catalogue-list {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 60px;
     background-color: var(--lightparchment);
-    margin-bottom: 30px;
 }
-
 
 /* ------------- catalogue-items ------------*/
 .catalogue-name {
@@ -59,14 +68,4 @@
 
 .catalogue-range {
     width: 60px;
-}
-
-/* -------- position-dummy ------- */
-.position-dummy {
-    width: 360px;
-    transition: width 0.3s ease;
-}
-
-.position-dummy.open {
-    width: 0;
 }
