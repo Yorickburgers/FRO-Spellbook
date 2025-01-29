@@ -31,11 +31,12 @@
 
 .home-inner-container h1,
 .home-inner-container p,
-.home-inner-container li,
-.home-inner-container ul {
+.home-inner-container ul,
+.home-inner-container li {
     color: var(--ink);
     background-color: var(--parchment);
     margin-left: 24px;
+    width: 100%;
 }
 
 .home-inner-container h1 {
