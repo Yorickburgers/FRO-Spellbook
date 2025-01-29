@@ -39,11 +39,6 @@ function Catalogue() {
             slashing: false,
             thunder: false,
         },
-        components: {
-            "exclude Verbal": false,
-            "exclude Somatic": false,
-            "exclude Material": false,
-        },
         classes: {
             bard: false,
             cleric: false,

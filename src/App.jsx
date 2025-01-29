@@ -6,6 +6,7 @@ import Catalogue from "./pages/catalogue/Catalogue.jsx";
 import SpellPage from "./pages/spellPage/SpellPage.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
 import SearchResults from "./pages/searchResults/SearchResults.jsx";
+import Favourites from "./pages/favourites/Favourites.jsx";
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/spells" element={<Catalogue/>}/>
-          <Route path="/favourites" />
+          <Route path="/favourites" element={<Favourites/>}/>
           <Route path="/spells/search/:searchTerm" element={<SearchResults/>}/>
           <Route path="/login" />
           <Route path="*" element={<NotFound/>}/>

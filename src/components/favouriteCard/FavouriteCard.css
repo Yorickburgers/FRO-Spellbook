@@ -1,0 +1,14 @@
+.favourite-card {
+    background-color: var(--parchment);
+    color: var(--ink);
+    padding: 24px;
+    width: 30%;
+}
+
+.favourite-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 15px 12px;
+}
+
