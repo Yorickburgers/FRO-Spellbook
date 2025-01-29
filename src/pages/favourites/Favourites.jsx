@@ -2,7 +2,7 @@ import './Favourites.css';
 import FavouriteCard from "../../components/favouriteCard/FavouriteCard.jsx";
 
 function Favourites() {
-    const testArray = ["acid-arrow", "fireball", "healing-word", "wish"]
+    const testArray = ["acid-arrow", "fireball", "healing-word", "wish", "eldritch-blast", "dimension-door", "fire-bolt", "false-life", "sleep", "meteor-swarm"]
 
     function handleDelete(spell) {
         console.log({spell} + " was deleted!");
