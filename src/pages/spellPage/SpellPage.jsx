@@ -10,7 +10,16 @@ function SpellPage() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [hidden, toggleHidden] = useState({
-        level: null
+        level: false,
+        duration: false,
+        components: false,
+        classes: false,
+        "casting time": false,
+        range: false,
+        attack: false,
+        dc: false,
+        healing: false,
+        damage: false,
     })
     const [tabOpen, setTabOpen] = useState(false);
 
@@ -63,13 +72,13 @@ function SpellPage() {
     return (
         <main className="page-container spell-details-outer">
             <h1 className="page-title">Spell Details</h1>
-            <div className="spell-outer-container">
+            <section className="spell-outer-container">
                 <HideTab
-                tabOpen={tabOpen}
-                setTabOpen={setTabOpen}
-                hidden={hidden}
-                toggleHidden={toggleHidden}/>
-                <div className="spell-details-container printed">
+                    tabOpen={tabOpen}
+                    setTabOpen={setTabOpen}
+                    hidden={hidden}
+                    toggleHidden={toggleHidden}/>
+                <article className="spell-details-container printed">
                     <div className="spell-name-container">
                         <p className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</p>
                         <h1 className="spell-name">{spellDetails.name}</h1>
@@ -81,24 +90,26 @@ function SpellPage() {
                         </button>
                     </div>
                     <div className="spell-attributes-container">
-                        <p className="spell-attribute">Level: {level}</p>
-                        <p className="spell-attribute">Duration: {duration}</p>
-                        <p className="spell-attribute">Components: {spellDetails?.components && spellDetails.components.map((comp) => comp).join(", ")}</p>
-                        <p className="spell-attribute">Classes: {classes}</p>
-                        <p className="spell-attribute">Casting time: {castTime}</p>
-                        <p className="spell-attribute">Range: {range}</p>
-                        {attack && <p className="spell-attribute">Attack: {attack}</p>}
-                        {dc && <p className="spell-attribute">DC: {dc}</p>}
-                        {healing && <p className="spell-attribute">Healing: {healing}</p>}
+                        <p className={`spell-attribute${hidden.level ? " hidden" : ""}`}>Level: {level}</p>
+                        <p className={`spell-attribute${hidden.duration ? " hidden" : ""}`}>Duration: {duration}</p>
+                        <p className={`spell-attribute${hidden.components ? " hidden" : ""}`}>Components: {spellDetails?.components && spellDetails.components.map((comp) => comp).join(", ")}</p>
+                        <p className={`spell-attribute${hidden.classes ? " hidden" : ""}`}>Classes: {classes}</p>
+                        <p className={`spell-attribute${hidden["casting time"] ? " hidden" : ""}`}>Casting
+                            time: {castTime}</p>
+                        <p className={`spell-attribute${hidden.range ? " hidden" : ""}`}>Range: {range}</p>
+                        {attack &&
+                            <p className={`spell-attribute${hidden.attack ? " hidden" : ""}`}>Attack: {attack}</p>}
+                        {dc && <p className={`spell-attribute${hidden.dc ? " hidden" : ""}`}>DC: {dc}</p>}
+                        {healing &&
+                            <p className={`spell-attribute${hidden.healing ? " hidden" : ""}`}>Healing: {healing}</p>}
                         {damageType !== undefined + " " + undefined && damageType !== null &&
-                            <p className="spell-attribute">Damage: {damageType}</p>}
+                            <p className={`spell-attribute${hidden.damage ? " hidden" : ""}`}>Damage: {damageType}</p>}
                     </div>
                     <div className="spell-description-container">{description}
                         {upcast && <p className="spell-description">Upcast: {upcast}</p>}</div>
-                </div>
-                <div></div> {/*dummy for positioning */}
-            </div>
-            <div></div> {/*dummy for positioning */}
+                </article>
+                <div className={`position-dummy ${tabOpen ? "open" : ""}`}></div>
+            </section>
         </main>
     );
 }
