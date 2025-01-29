@@ -6,8 +6,8 @@ function HideTab({tabOpen, setTabOpen, hidden, toggleHidden}) {
 return (
     <>
         <section className={`hide-container${tabOpen ? " open" : ""}`}>
-            <h2>Display</h2>
-            <button type="button" className="tab-button" onClick={() => handleTab(setTabOpen)}>Display</button>
+            <h2>Hide attributes</h2>
+            <button type="button" className="tab-button" onClick={() => handleTab(setTabOpen)}>Hide</button>
             <ul className="hide-details">
                 {Object.keys(hidden).map((category) => (
                         <HideOption
