@@ -1,0 +1,20 @@
+.favourite-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--parchment);
+    color: var(--ink);
+    padding: 24px;
+    width: 30%;
+    margin-bottom: 24px;
+    border-radius: 20px;
+    align-items: center;
+}
+
+.favourite-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin: 15px 12px;
+}
+
