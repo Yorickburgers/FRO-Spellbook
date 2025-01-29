@@ -102,7 +102,7 @@ function Navigation() {
                 )}
             </section>
             <section className="outer-nav-container">
-                <NavLink className="navLink-account" to="/login">Login</NavLink>
+                <NavLink className="navLink-account" to="/account">Login</NavLink>
             </section>
         </nav>
     );
