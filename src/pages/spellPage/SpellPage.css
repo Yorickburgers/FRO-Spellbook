@@ -62,6 +62,10 @@
     font-size: 18px;
 }
 
+.spell-attribute.hidden {
+    display: none;
+}
+
 /* -------------- description ---------------- */
 .spell-description-container {
     height: auto;
@@ -75,7 +79,7 @@
 }
 
 .spell-description+.spell-description {
-    margin: 0.5em 0;
+    margin: 12px 0;
 }
 
 /* ------------------- print + button ------------------ */
@@ -84,14 +88,16 @@
         visibility: hidden;
     }
 
-    #print, #print * {
+    .printed, .printed * {
         visibility: visible;
         color: var(--ink);
         background-color: var(--parchment);
         border: inherit;
+        width: 800px;
     }
 
-    button, button * {
+    .print-button,
+    .star {
         visibility: hidden;
     }
 }
