@@ -75,7 +75,7 @@
 }
 
 .spell-description+.spell-description {
-    margin: 0.5em 0;
+    margin: 12px 0;
 }
 
 /* ------------------- print + button ------------------ */
@@ -84,14 +84,15 @@
         visibility: hidden;
     }
 
-    #print, #print * {
+    .printed, .printed * {
         visibility: visible;
         color: var(--ink);
         background-color: var(--parchment);
         border: inherit;
     }
 
-    button, button * {
+    .print-button,
+    .star {
         visibility: hidden;
     }
 }

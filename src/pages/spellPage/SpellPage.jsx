@@ -2,12 +2,16 @@ import './SpellPage.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
+import HideTab from "../../components/hideTab/HideTab.jsx";
 
 function SpellPage() {
     const {id} = useParams();
     const [spellDetails, setSpellDetails] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [hidden, toggleHidden] = useState({
+        level: null
+    })
 
     useEffect(() => {
         const controller = new AbortController();
@@ -61,10 +65,10 @@ function SpellPage() {
         <main className="page-container spell-details-outer">
             <h1 className="page-title">Spell Details</h1>
             <div className="spell-outer-container">
-                <div className="hide-bar">hide</div>
-                <div className="spell-details-container" id="print">
+                <HideTab/>
+                <div className="spell-details-container printed">
                     <div className="spell-name-container">
-                        <span className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</span>
+                        <p className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</p>
                         <h1 className="spell-name">{spellDetails.name}</h1>
                         <button
                             type="button"
