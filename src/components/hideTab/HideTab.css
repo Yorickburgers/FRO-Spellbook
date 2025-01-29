@@ -2,7 +2,7 @@
     display: flex;
     align-self: start;
     flex-direction: column;
-    height: 720px;
+    height: 300px;
     max-height: 800px;
     background-color: var(--parchment);
     flex-grow: 0;
@@ -22,4 +22,9 @@
 
 .hide-container.open {
     transform: translateX(0);
+}
+
+.hide-details {
+    margin-top: 24px;
+    list-style: none;
 }
