@@ -84,7 +84,6 @@ function Catalogue() {
     const [selectedClass, setSelectedClass] = useState("")
 
 
-
     useEffect(() => {
         const controller = new AbortController();
 
