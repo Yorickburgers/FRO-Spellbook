@@ -4,14 +4,11 @@ import {handleTab} from "../../helpers/handleTab.js";
 function HideTab({tabOpen, setTabOpen, hidden, setHidden}) {
 return (
     <>
-        <section className={`filters-container${tabOpen ? " open" : ""}`}>
-            <h2>Filters</h2>
+        <section className={`hide-container${tabOpen ? " open" : ""}`}>
+            <h2>Hide Details</h2>
             <button type="button" className="tab-button" onClick={() => handleTab(setTabOpen)}>Filters</button>
-            <ul className="filters">
-
-
-                <li className="filter-list-item"><label htmlFor="includes-input">Includes: <input
-                    className="accountInput" name="includes-input" type="text" value={null} onChange={null}/></label></li>
+            <ul className="hide-details">
+                <li className="x"></li>
             </ul>
         </section>
     </>

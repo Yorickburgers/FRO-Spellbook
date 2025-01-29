@@ -12,6 +12,7 @@ function SpellPage() {
     const [hidden, toggleHidden] = useState({
         level: null
     })
+    const [tabOpen, setTabOpen] = useState(false);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -46,9 +47,7 @@ function SpellPage() {
     const classes = spellDetails.classes
         ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
         : null;
-    const damageType = spellDetails?.damage?.damage_at_slot_level?.[spellDetails?.level] && spellDetails?.damage?.damage_type?.name
-        ? `${spellDetails?.damage?.damage_at_slot_level[spellDetails?.level]} ${spellDetails?.damage?.damage_type?.name}`
-        : null;
+    const damageType = (spellDetails?.damage?.damage_at_slot_level && `${spellDetails?.damage?.damage_at_slot_level?.[spellDetails?.level]} ${spellDetails?.damage?.damage_type?.name}`) || (spellDetails?.damage?.damage_at_character_level && `${spellDetails?.damage?.damage_at_character_level?.[1]} ${spellDetails?.damage?.damage_type?.name}`) || null;
     const healing = spellDetails?.heal_at_slot_level?.[spellDetails.level] || null;
     const castTime = spellDetails?.casting_time || null;
     const range = spellDetails?.range || null;
@@ -65,7 +64,11 @@ function SpellPage() {
         <main className="page-container spell-details-outer">
             <h1 className="page-title">Spell Details</h1>
             <div className="spell-outer-container">
-                <HideTab/>
+                <HideTab
+                tabOpen={tabOpen}
+                setTabOpen={setTabOpen}
+                hidden={hidden}
+                toggleHidden={toggleHidden}/>
                 <div className="spell-details-container printed">
                     <div className="spell-name-container">
                         <p className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</p>
