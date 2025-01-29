@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 400px;
     border-radius: 30px;
     margin: 60px 20px;
@@ -26,7 +26,39 @@
     background-color: var(--blue);
 }
 
+.account-form {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 320px;
+    height: 50%;
+}
+
 .account-label {
     display: flex;
     flex-direction: column;
+}
+
+.section-title {
+    margin: 60px 0 60px;
+}
+
+.account-form button {
+    justify-self: end;
+}
+
+.register-message {
+    height: 55px;
+    align-content: center;
+}
+
+.account-error {
+    margin-bottom: 60px;
+    color: var(--pink);
+}
+
+.accountInput[type=password] {
+    font-family: "Arial", serif;
+    width: 97%;
 }
