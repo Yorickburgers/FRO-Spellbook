@@ -105,7 +105,17 @@ function Navigation() {
             </section>
             <section className="outer-nav-container">
                 <p className="username">{userUsername}</p>
-                {!isLoggedIn ? <NavLink className="navLink-account" to="/account">{isLoggedIn && "Logout" || !isLoggedIn && "Login"}</NavLink> : <button className="button logout" type="button" onClick={logoutUser}>Logout</button>}
+                {isLoggedIn
+                    ? <button
+                        className="button logout"
+                        type="button" onClick={logoutUser}
+                    >Logout
+                    </button>
+                    : <NavLink
+                        className="navLink-account"
+                        to="/account"
+                    >Login
+                    </NavLink>}
             </section>
         </nav>
     );
