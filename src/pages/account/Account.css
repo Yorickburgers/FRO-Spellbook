@@ -44,10 +44,6 @@
     margin: 60px 0 60px;
 }
 
-.account-form button {
-    justify-self: end;
-}
-
 .register-message {
     height: 55px;
     align-content: center;
@@ -61,4 +57,18 @@
 .accountInput[type=password] {
     font-family: "Arial", serif;
     width: 97%;
+}
+
+/* ---------------- buttons ------------- */
+.account-form button {
+    justify-self: end;
+}
+
+.account-form .disabled {
+    cursor: not-allowed;
+    background-color: lightgrey;
+}
+
+.account-form .disabled:hover {
+    color: var(--coral);
 }
