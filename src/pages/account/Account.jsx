@@ -26,7 +26,8 @@ function Account() {
     }
 
     useEffect(() => {
-        registerInput.password !== registerInput.confirm && setError( "passwords don't match, try again")
+        registerInput.password !== registerInput.confirm && registerInput.confirm !== "" && setError( "passwords don't match, try again");
+        registerInput.password === registerInput.confirm && setError("");
     }, [registerInput]);
 
     function logInput() {
