@@ -1,9 +1,19 @@
-import {createContext} from "react";
+import {createContext, useState} from "react";
 export const AuthContext = createContext(null);
 
 function AuthContextProvider({children}) {
-    // hier komt de state voor de context-data
+    const [isLoggedIn, setIsLoggedIn] = useState({
+        loggedIn: false,
+        user: {
+            username: "",
+            password: "",
+            token: "",
+        }
+    })
 
+    function registerUser() {
+
+    }
     return (
         <AuthContext.Provider value={null}>
             {children}

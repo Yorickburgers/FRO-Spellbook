@@ -11,7 +11,8 @@ function Account() {
         password: "",
         confirm: "",
     })
-    const [error, setError] = useState("");
+    const [registerError, setRegisterError] = useState("");
+    const [loginError, setLoginError] = useState("");
 
     function handleLoginChange(e) {
         setLoginInput(e.target.value);
@@ -26,8 +27,8 @@ function Account() {
     }
 
     useEffect(() => {
-        registerInput.password !== registerInput.confirm && registerInput.confirm !== "" && setError( "passwords don't match, try again");
-        registerInput.password === registerInput.confirm && setError("");
+        registerInput.password !== registerInput.confirm && registerInput.confirm !== "" && setRegisterError( "passwords don't match, try again");
+        registerInput.password === registerInput.confirm && setRegisterError("");
     }, [registerInput]);
 
     function logInput() {
@@ -52,7 +53,7 @@ function Account() {
                             <h2>Login</h2>
                         </button>
                     </form>
-                    <div className="account-error"></div>
+                    <div className="account-error">{loginError}</div>
                 </section>
                 <div className="separation"></div>
                 <section className="account-inner-container">
@@ -67,11 +68,11 @@ function Account() {
                         <label className="account-label" htmlFor="confirm">Confirm password:
                             <input type="password" id="confirm" name="confirm" className="accountInput" onChange={handleRegisterChange} value={registerInput.confirm}/>
                         </label>
-                        <button type="submit" className="button" onClick={logInput}>
+                        <button type="submit" className={`button ${registerInput.password !== registerInput.confirm ? " disabled" : ""}`}  disabled={registerInput.password !== registerInput.confirm} onClick={logInput}>
                             <h2>Register</h2>
                         </button>
                     </form>
-                    <p className="account-error">{error}</p>
+                    <p className="account-error">{registerError}</p>
                 </section>
             </div>
         </main>
