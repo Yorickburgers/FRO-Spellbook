@@ -1,23 +1,8 @@
 import './Home.css';
 import Button from "../../components/button/Button.jsx";
 import logo from "/src/assets/spellbook-logo.png";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
 
 function Home() {
-    const [searchValue, setSearchValue] = useState("");
-    const navigate = useNavigate();
-
-    function searchHandler(e) {
-        setSearchValue(e.target.value);
-    }
-
-    function handleSearchClick() {
-        if (searchValue) {
-            navigate(`spells/search/${searchValue}`)
-        }
-    }
-
     return (
         <main className="page-container">
             <section className="outer-container">
@@ -53,10 +38,7 @@ function Home() {
                         forgot
                         the details about? Look for it here by typing the spell name or a keyword in the search bar at the top of your screen.</p>
                     <p>Choose one of the suggestions or press the button to search for your own search term. </p>
-                        <Button
-                            text="Search"
-                            onClick={handleSearchClick}
-                        />
+
                 </article>
                 <article className="function-box">
                     <h2>Favourites</h2>
