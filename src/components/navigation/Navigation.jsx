@@ -15,7 +15,7 @@ function Navigation() {
     const [filteredSpells, setFilteredSpells] = useState([]);
     const [loading, setLoading] = useState(true);
     const [inputFocused, setInputFocused] = useState(false);
-    const {isLoggedIn, userUsername} = useContext(AuthContext);
+    const {isLoggedIn, userUsername, logoutUser} = useContext(AuthContext);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -104,7 +104,8 @@ function Navigation() {
                 )}
             </section>
             <section className="outer-nav-container">
-                <NavLink className="navLink-account" to="/account">{isLoggedIn && "Account" || !isLoggedIn && "Login"}</NavLink>
+                <p className="username">{userUsername}</p>
+                {!isLoggedIn ? <NavLink className="navLink-account" to="/account">{isLoggedIn && "Logout" || !isLoggedIn && "Login"}</NavLink> : <button className="button logout" type="button" onClick={logoutUser}>Logout</button>}
             </section>
         </nav>
     );

@@ -4,7 +4,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../../components/button/Button.jsx";
 
 function Account() {
-    const {isLoggedIn, userEmail, userUsername, loginUser, logoutUser, } = useContext(AuthContext);
+    const {isLoggedIn, userEmail, userUsername, loginUser, logoutUser } = useContext(AuthContext);
     const [loginInput, setLoginInput] = useState({
         username: "",
         password: "",

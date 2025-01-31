@@ -18,15 +18,10 @@ nav {
     height: 100%;
     align-items: center;
     justify-content: start;
-    background-color: var(--purple);
 }
 
 .center {
     position: relative;
-}
-
-.navLink {
-    background-color: var(--purple);
 }
 
 /* ----------------- Links ----------------- */
@@ -63,6 +58,11 @@ nav {
     background-color: var(--blue);
     border-radius: 30px;
     cursor: pointer;
+    margin-left: 24px;
+}
+
+.username {
+    color: var(--coral);
 }
 
 .navLink-account:hover {
