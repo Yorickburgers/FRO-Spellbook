@@ -16,7 +16,6 @@ function Account() {
         confirm: "",
     });
     const [passwordError, setPasswordError] = useState("");
-    const navigate = useNavigate();
 
     function handleLoginChange(e) {
         const {name, value} = e.target;
@@ -37,13 +36,11 @@ function Account() {
     function handleLoginSubmit(e) {
         e.preventDefault();
         loginUser(loginInput);
-        navigate("/");
     }
 
     function handleRegisterSubmit(e) {
         e.preventDefault();
         registerUser(registerInput);
-        // navigate("/");
     }
 
     useEffect(() => {

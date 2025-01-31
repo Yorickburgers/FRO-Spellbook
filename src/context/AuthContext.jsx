@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
@@ -19,6 +19,7 @@ function AuthContextProvider({children}) {
 
     function loginUser(loginInput) {
         console.log(loginInput);
+
         async function checkLoginUser() {
             setLoginError("")
             try {
@@ -36,11 +37,13 @@ function AuthContextProvider({children}) {
                         username: loginInput.username,
                     }
                 }));
-            } catch(e) {
+                navigate("/");
+            } catch (e) {
                 console.error(e);
                 setLoginError("User not found");
             }
         }
+
         checkLoginUser();
     }
 
@@ -58,13 +61,13 @@ function AuthContextProvider({children}) {
 
     function registerUser(registerInput) {
         async function registerNewUser() {
-            setRegisterError(false);
+            setRegisterError("");
             try {
                 const response = await axios.post("https://api.datavortex.nl/spellbook/users", {
                         "username": registerInput.username,
                         "password": registerInput.password,
                         "email": registerInput.email,
-                        "info": "",
+                        "info": "test",
                         "authorities": [
                             {
                                 "authority": "USER"
@@ -80,20 +83,42 @@ function AuthContextProvider({children}) {
                 console.log(response);
                 setIsLoggedIn(prevState => ({
                     ...prevState,
-                    isLoggedIn: true,
+                    loggedIn: true,
                     user: {
-                        username: response.data.username,
-                        email: response.data.email,
+                        username: registerInput.username,
+                        email: registerInput.email,
                     }
                 }));
+                navigate("/");
             } catch (e) {
                 console.error(e);
                 setRegisterError("User already exists");
             }
         }
+
         registerNewUser();
 
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem("AuthToken")
+        if (token) {
+            async function retrieveUserInfo() {
+                try {
+                    const response = await axios.get(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}/info`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        }
+                    })
+                    console.log(response)
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            retrieveUserInfo();
+        }
+    }, [isLoggedIn]);
 
     return (
         <AuthContext.Provider value={{
