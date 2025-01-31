@@ -2,9 +2,10 @@ import './Account.css';
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../../components/button/Button.jsx";
+import {useNavigate} from "react-router-dom";
 
 function Account() {
-    const {isLoggedIn, userEmail, userUsername, loginUser, logoutUser } = useContext(AuthContext);
+    const {isLoggedIn, userEmail, userUsername, loginUser, logoutUser} = useContext(AuthContext);
     const [loginInput, setLoginInput] = useState({
         username: "",
         password: "",
@@ -17,12 +18,13 @@ function Account() {
     })
     const [registerError, setRegisterError] = useState("");
     const [loginError, setLoginError] = useState("");
+    const navigate = useNavigate();
 
     function handleLoginChange(e) {
         const {name, value} = e.target;
         setLoginInput(prevState => ({
             ...prevState,
-                [name]: value
+            [name]: value
         }));
     }
 
@@ -37,10 +39,11 @@ function Account() {
     function handleSubmit(e) {
         e.preventDefault();
         loginUser(loginInput.username);
+        navigate("/")
     }
 
     useEffect(() => {
-        registerInput.password !== registerInput.confirm && registerInput.confirm !== "" && setRegisterError( "passwords don't match, try again");
+        registerInput.password !== registerInput.confirm && registerInput.confirm !== "" && setRegisterError("passwords don't match, try again");
         registerInput.password === registerInput.confirm && setRegisterError("");
     }, [registerInput]);
 
@@ -53,12 +56,13 @@ function Account() {
         console.log(isLoggedIn);
     }
 
-        return (
+    return (
 
         <main className="page-container">
             <h1 className="page-title">Account</h1>
-            {!isLoggedIn
-            ? <div className="account-outer-container">
+            {/*{!isLoggedIn*/}
+            {/*? */}
+            <div className="account-outer-container">
                 <section className="account-inner-container">
                     <h2 className="section-title">Login</h2>
                     <form className="account-form" onSubmit={(e) => handleSubmit(e)}>
@@ -111,19 +115,18 @@ function Account() {
                     <p className="account-error">{registerError}</p>
                 </section>
             </div>
-            : <div className="account-outer-container"><section className="account-inner-container">
-            <h2 className="section-title">Account information</h2>
-            <div className="account-information"><p>Username: {userUsername}</p>
-            <p>Email: {userEmail}</p>
-            <p>Favourites: <Button
-                text="Favourites"
-                link="/favourites"
-            /></p></div>
-                    <button type="button" className="button" onClick={logoutUser}>Logout</button> }
-
-        </section></div>}
+            {/*//     : <div className="account-outer-container"><section className="account-inner-container">*/}
+            {/*//     <h2 className="section-title">Account information</h2>*/}
+            {/*//     <div className="account-information"><p>Username: {userUsername}</p>*/}
+            {/*//     <p>Email: {userEmail}</p>*/}
+            {/*//     <p>Favourites: <Button*/}
+            {/*//         text="Favourites"*/}
+            {/*//         link="/favourites"*/}
+            {/*//     /></p></div>*/}
+            {/*//             <button type="button" className="button" onClick={logoutUser}>Logout</button> }*/}
+            {/*//*/}
+            {/*// </section></div>}*/}
         </main>
     );
 }
-
 export default Account;
