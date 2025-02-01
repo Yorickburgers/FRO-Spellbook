@@ -2,10 +2,11 @@ import './Navigation.css';
 import logo from "/src/assets/spellbook-logo.png";
 import {NavLink, useNavigate} from "react-router-dom";
 import Button from "../button/Button.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import handleFocus from "../../helpers/handleFocus.js";
 import handleBlur from "../../helpers/handleBlur.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Navigation() {
     const [filteredSpells, setFilteredSpells] = useState([]);
     const [loading, setLoading] = useState(true);
     const [inputFocused, setInputFocused] = useState(false);
+    const {isLoggedIn, userUsername, logoutUser} = useContext(AuthContext);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -102,7 +104,18 @@ function Navigation() {
                 )}
             </section>
             <section className="outer-nav-container">
-                <NavLink className="navLink-account" to="/login">Login</NavLink>
+                <p className="username">{userUsername}</p>
+                {isLoggedIn
+                    ? <button
+                        className="button logout"
+                        type="button" onClick={logoutUser}
+                    >Logout
+                    </button>
+                    : <NavLink
+                        className="navLink-account"
+                        to="/account"
+                    >Login
+                    </NavLink>}
             </section>
         </nav>
     );
