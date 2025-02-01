@@ -84,7 +84,7 @@ function AuthContextProvider({children}) {
                         }
                     }
                 );
-                setRegisterComment("Registered succesfully! Please log in.")
+                setRegisterComment("Registered succesfully! Please log in.");
             } catch (e) {
                 console.error(e);
                 setRegisterError("User already exists");
