@@ -4,7 +4,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 
 function Account() {
-    const {isLoggedIn, loginUser, registerUser, registerError, loginError} = useContext(AuthContext);
+    const {loginUser, registerUser, registerError, loginError, registerComment} = useContext(AuthContext);
     const [loginInput, setLoginInput] = useState({
         username: "",
         password: "",
@@ -52,11 +52,6 @@ function Account() {
         console.log(registerInput);
     }
 
-    function clickHandler(e) {
-        e.preventDefault();
-        console.log(isLoggedIn);
-    }
-
     return (
 
         <main className="page-container">
@@ -65,9 +60,6 @@ function Account() {
                 <section className="account-inner-container">
                     <h2 className="section-title">Login</h2>
                     <form className="account-form" onSubmit={(e) => handleLoginSubmit(e)}>
-                        <div>
-                            <button onClick={clickHandler} type="button">test</button>
-                        </div>
                         <label className="account-label" htmlFor="login-username">Username:
                             <input type="text" className="accountInput" id="login-username" name="username"
                                    onChange={handleLoginChange} value={loginInput.username}/>
@@ -76,7 +68,7 @@ function Account() {
                             <input type="password" className="accountInput" id="login-password" name="password"
                                    onChange={handleLoginChange} value={loginInput.password}/>
                         </label>
-                        <h3 className="register-message">Don't have an account? Register a new one! </h3>
+                        <h3 className="register-message">{registerComment || "Don't have an account? Register a new one!"}</h3>
                         <button type="submit" className="button">
                             <h2>Login</h2>
                         </button>
