@@ -55,7 +55,7 @@ function SpellPage() {
         setFavourites(prevFavourites =>
             prevFavourites.includes(id)
                 ? prevFavourites.filter(fav => fav !== id)
-                : [...prevFavourites, id]
+                : [...prevFavourites, id].sort()
         );
     };
 
@@ -90,7 +90,8 @@ function SpellPage() {
                     toggleHidden={toggleHidden}/>
                 <article className="spell-details-container printed">
                     <div className="spell-name-container">
-                        <p className={`star ${favourites.includes(id) ? "favourited" : ""}`} onClick={() => toggleFavourite(id)}>★</p>
+                        <p className={`star ${favourites.includes(id) ? "favourited" : ""}`}
+                           onClick={() => toggleFavourite(id)}>★</p>
                         <h1 className="spell-name">{spellDetails.name}</h1>
                         <button
                             type="button"

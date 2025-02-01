@@ -10,7 +10,6 @@ function Favourites() {
         const updatedFavourites = [...favourites];
         updatedFavourites.splice(updatedFavourites.indexOf(spell), 1);
         setFavourites(updatedFavourites);
-        console.log(spell + " was deleted!");
     }
 
 return (

@@ -183,8 +183,8 @@ function AuthContextProvider({children}) {
     }, [isLoggedIn.loggedIn, isLoggedIn.user.username]);
 
     useEffect(() => {
-        console.log(isLoggedIn)
-        setFavourites((isLoggedIn.user.info).split("&").filter(item => item !== ""));
+
+        setFavourites((isLoggedIn.user.info).split("&").filter(item => item !== "").sort());
     }, [isLoggedIn.user.info]);
 
     useEffect(() => {
