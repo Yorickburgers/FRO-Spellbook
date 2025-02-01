@@ -11,9 +11,11 @@ function AuthContextProvider({children}) {
         user: {
             username: "",
             info: "",
+            password: "",
+            email: "",
         },
         status: "pending",
-    })
+    });
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState("");
     const [loginError, setLoginError] = useState("");
@@ -118,6 +120,8 @@ function AuthContextProvider({children}) {
                         user: {
                             username: response.data.username,
                             info: response.data.info,
+                            password: response.data.password,
+                            email: response.data.email,
                         },
                         status: "done",
                     })
@@ -168,6 +172,7 @@ function AuthContextProvider({children}) {
                     console.error(e);
                 }
             }
+
             retrieveInfo();
         }
 
@@ -181,7 +186,36 @@ function AuthContextProvider({children}) {
     }, [isLoggedIn.user.info]);
 
     useEffect(() => {
+        const controller = new AbortController();
+        const token = localStorage.getItem("authToken");
 
+        async function changeUserInfo() {
+            try {
+                const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
+                        username: isLoggedIn.user.username,
+                        password: isLoggedIn.user.password,
+                        email: isLoggedIn.user.email,
+                        info: favourites.join("&"),
+                    }
+                    , {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        signal: controller.signal,
+                    }
+                );
+                console.log(response);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        changeUserInfo();
+
+        return function cleanup() {
+            controller.abort();
+        }
     }, [favourites]);
 
     return (

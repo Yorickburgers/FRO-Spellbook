@@ -1,8 +1,9 @@
 import './SpellPage.css';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import HideTab from "../../components/hideTab/HideTab.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function SpellPage() {
     const {id} = useParams();
@@ -22,6 +23,7 @@ function SpellPage() {
         damage: false,
     })
     const [tabOpen, setTabOpen] = useState(false);
+    const {favourites, setFavourites} = useContext(AuthContext);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -48,6 +50,16 @@ function SpellPage() {
             controller.abort();
         }
     }, [id, navigate]);
+
+    function handleFavouriteClick() {
+        if (favourites.includes(id)) {
+            const updatedFavourites = [...favourites];
+            updatedFavourites.splice(updatedFavourites.indexOf(id), 1);
+            setFavourites(updatedFavourites);
+        } else {
+            favourites.push(id);
+        }
+    }
 
     if (loading) {
         return <div>Loading...</div>;
@@ -80,7 +92,7 @@ function SpellPage() {
                     toggleHidden={toggleHidden}/>
                 <article className="spell-details-container printed">
                     <div className="spell-name-container">
-                        <p className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</p>
+                        <p className={`star ${favourites.includes({id}) ? "favourited" : ""}`} onClick={() => handleFavouriteClick()}>★</p>
                         <h1 className="spell-name">{spellDetails.name}</h1>
                         <button
                             type="button"
