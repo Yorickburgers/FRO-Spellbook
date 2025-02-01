@@ -50,7 +50,7 @@ function FavouriteCard({index, handleDelete}) {
                 {!dmgHealType && <p>Support</p>}
                 <p>Level: {spellDetails.level}</p>
             </div>
-            <button type="button" className="button" onClick={() => handleDelete({index})}>Remove from favourites</button>
+            <button type="button" className="button" onClick={() => handleDelete(index)}>Remove from favourites</button>
         </article>
     );
 }

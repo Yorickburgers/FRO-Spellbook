@@ -177,8 +177,13 @@ function AuthContextProvider({children}) {
     }, [isLoggedIn.loggedIn, isLoggedIn.user.username]);
 
     useEffect(() => {
-        const favourites = isLoggedIn.user.info
+        setFavourites((isLoggedIn.user.info).split("&").filter(item => item !== ""));
     }, [isLoggedIn.user.info]);
+
+    useEffect(() => {
+
+    }, [favourites]);
+
     return (
         <AuthContext.Provider value={{
             isLoggedIn: isLoggedIn.loggedIn,
@@ -189,6 +194,8 @@ function AuthContextProvider({children}) {
             registerError: registerError,
             loginError: loginError,
             registerComment: registerComment,
+            favourites: favourites,
+            setFavourites: setFavourites,
         }
         }>
             {isLoggedIn.status === "done" && children}
