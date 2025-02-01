@@ -6,13 +6,13 @@ import {jwtDecode} from "jwt-decode";
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
-    const [decodedToken, setDecodedToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState({
         loggedIn: false,
         user: {
             username: "",
             info: "",
-        }
+        },
+        status: "pending",
     })
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState("");
@@ -20,8 +20,6 @@ function AuthContextProvider({children}) {
     const [registerComment, setRegisterComment] = useState("")
 
     function loginUser(loginInput) {
-        console.log(loginInput);
-
         async function checkLoginUser() {
             setLoginError("")
             try {
@@ -29,11 +27,8 @@ function AuthContextProvider({children}) {
                     "username": loginInput.username,
                     "password": loginInput.password,
                 });
-                console.log(response);
                 const token = response.data.jwt;
                 localStorage.setItem("authToken", token)
-                const decoded = jwtDecode(token);
-                console.log(decoded);
                 setIsLoggedIn(prevState => ({
                     ...prevState,
                     loggedIn: true,
@@ -41,10 +36,14 @@ function AuthContextProvider({children}) {
                         username: loginInput.username,
                     }
                 }));
-                // navigate("/");
+                navigate("/");
             } catch (e) {
                 console.error(e);
                 setLoginError("User not found");
+                setIsLoggedIn(prevState => ({
+                    ...prevState,
+                    status: "done"
+                }))
             }
         }
 
@@ -54,10 +53,11 @@ function AuthContextProvider({children}) {
     function logoutUser() {
         navigate("/");
         setIsLoggedIn({
+            ...isLoggedIn,
             loggedIn: false,
             user: {
                 username: "",
-                email: "",
+                info: "",
             }
         })
         localStorage.removeItem("authToken");
@@ -97,17 +97,20 @@ function AuthContextProvider({children}) {
     }
 
     useEffect(() => {
+        const controller = new AbortController();
         const token = localStorage.getItem("authToken");
-        // if (token) {
+        const decoded = jwtDecode(token);
+        const expDate = decoded.exp;
+        const currentDate = Math.floor(Date.now() / 1000);
+        if (expDate >= currentDate) {
             async function retrieveUserInfo() {
-                const decoded = jwtDecode(token);
-                console.log(decoded);
                 try {
                     const response = await axios.get(`https://api.datavortex.nl/spellbook/users/${decoded.sub}`, {
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`,
-                        }
+                        },
+                        signal: controller.signal,
                     })
                     console.log(response);
                     setIsLoggedIn({
@@ -115,20 +118,34 @@ function AuthContextProvider({children}) {
                         user: {
                             username: response.data.username,
                             info: response.data.info,
-                        }
+                        },
+                        status: "done",
                     })
-                } catch(e) {
+                } catch (e) {
                     console.error(e);
                 }
             }
+
             retrieveUserInfo();
-        // }
+            setIsLoggedIn({
+                ...isLoggedIn,
+                status: "done",
+            })
+        } else {
+            setIsLoggedIn({
+                ...isLoggedIn,
+                status: "done",
+            });
+        }
+
+        return function cleanup() {
+            controller.abort();
+        }
     }, []);
 
     return (
         <AuthContext.Provider value={{
             isLoggedIn: isLoggedIn.loggedIn,
-            userEmail: isLoggedIn.user.email,
             userUsername: isLoggedIn.user.username,
             loginUser: loginUser,
             logoutUser: logoutUser,
@@ -138,7 +155,7 @@ function AuthContextProvider({children}) {
             registerComment: registerComment,
         }
         }>
-            {children}
+            {isLoggedIn.status === "done" && children}
         </AuthContext.Provider>
     )
 }

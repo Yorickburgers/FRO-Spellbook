@@ -1,7 +1,6 @@
 import './Account.css';
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
-import {useNavigate} from "react-router-dom";
 
 function Account() {
     const {loginUser, registerUser, registerError, loginError, registerComment} = useContext(AuthContext);
@@ -47,10 +46,6 @@ function Account() {
         registerInput.password !== registerInput.confirm && registerInput.confirm !== "" && setPasswordError("passwords don't match, try again");
         registerInput.password === registerInput.confirm && setPasswordError("");
     }, [registerInput]);
-
-    function logInput() {
-        console.log(registerInput);
-    }
 
     return (
 
@@ -100,7 +95,7 @@ function Account() {
                         </label>
                         <button type="submit"
                                 className={`button ${registerInput.password !== registerInput.confirm ? " disabled" : ""}`}
-                                disabled={registerInput.password !== registerInput.confirm} onClick={logInput}>
+                                disabled={registerInput.password !== registerInput.confirm}>
                             <h2>Register</h2>
                         </button>
                     </form>
