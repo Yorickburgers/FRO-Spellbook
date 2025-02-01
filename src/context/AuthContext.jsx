@@ -37,6 +37,7 @@ function AuthContextProvider({children}) {
                     ...prevState,
                     loggedIn: true,
                     user: {
+                        ...prevState.user,
                         username: loginInput.username,
                     }
                 }));
@@ -182,6 +183,7 @@ function AuthContextProvider({children}) {
     }, [isLoggedIn.loggedIn, isLoggedIn.user.username]);
 
     useEffect(() => {
+        console.log(isLoggedIn)
         setFavourites((isLoggedIn.user.info).split("&").filter(item => item !== ""));
     }, [isLoggedIn.user.info]);
 

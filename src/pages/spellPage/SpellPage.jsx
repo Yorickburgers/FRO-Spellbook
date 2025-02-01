@@ -51,15 +51,13 @@ function SpellPage() {
         }
     }, [id, navigate]);
 
-    function handleFavouriteClick() {
-        if (favourites.includes(id)) {
-            const updatedFavourites = [...favourites];
-            updatedFavourites.splice(updatedFavourites.indexOf(id), 1);
-            setFavourites(updatedFavourites);
-        } else {
-            favourites.push(id);
-        }
-    }
+    const toggleFavourite = (id) => {
+        setFavourites(prevFavourites =>
+            prevFavourites.includes(id)
+                ? prevFavourites.filter(fav => fav !== id)
+                : [...prevFavourites, id]
+        );
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -92,7 +90,7 @@ function SpellPage() {
                     toggleHidden={toggleHidden}/>
                 <article className="spell-details-container printed">
                     <div className="spell-name-container">
-                        <p className={`star ${favourites.includes({id}) ? "favourited" : ""}`} onClick={() => handleFavouriteClick()}>★</p>
+                        <p className={`star ${favourites.includes(id) ? "favourited" : ""}`} onClick={() => toggleFavourite(id)}>★</p>
                         <h1 className="spell-name">{spellDetails.name}</h1>
                         <button
                             type="button"

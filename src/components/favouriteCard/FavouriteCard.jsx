@@ -1,7 +1,8 @@
 import './FavouriteCard.css';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function FavouriteCard({index, handleDelete}) {
    const [spellDetails, setSpellDetails] = useState({});
