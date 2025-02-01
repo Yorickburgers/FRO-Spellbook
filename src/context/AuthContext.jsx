@@ -17,7 +17,8 @@ function AuthContextProvider({children}) {
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState("");
     const [loginError, setLoginError] = useState("");
-    const [registerComment, setRegisterComment] = useState("")
+    const [registerComment, setRegisterComment] = useState("");
+    const [favourites, setFavourites] = useState([]);
 
     function loginUser(loginInput) {
         async function checkLoginUser() {
@@ -29,6 +30,7 @@ function AuthContextProvider({children}) {
                 });
                 const token = response.data.jwt;
                 localStorage.setItem("authToken", token)
+
                 setIsLoggedIn(prevState => ({
                     ...prevState,
                     loggedIn: true,
@@ -141,6 +143,42 @@ function AuthContextProvider({children}) {
         }
     }, []);
 
+    useEffect(() => {
+        const controller = new AbortController();
+        const token = localStorage.getItem("authToken");
+
+        if (token && isLoggedIn.loggedIn && isLoggedIn.user.username) {
+            async function retrieveInfo() {
+                try {
+                    const responseInfo = await axios.get(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}/info`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        signal: controller.signal,
+                    });
+                    setIsLoggedIn(prevState => ({
+                        ...prevState,
+                        user: {
+                            ...prevState.user,
+                            info: responseInfo.data,
+                        }
+                    }));
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+            retrieveInfo();
+        }
+
+        return function cleanup() {
+            controller.abort();
+        }
+    }, [isLoggedIn.loggedIn, isLoggedIn.user.username]);
+
+    useEffect(() => {
+        const favourites = isLoggedIn.user.info
+    }, [isLoggedIn.user.info]);
     return (
         <AuthContext.Provider value={{
             isLoggedIn: isLoggedIn.loggedIn,

@@ -1,9 +1,11 @@
 import './Favourites.css';
 import FavouriteCard from "../../components/favouriteCard/FavouriteCard.jsx";
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Favourites() {
     const testArray = ["acid-arrow", "fireball", "healing-word", "wish", "eldritch-blast", "dimension-door", "fire-bolt", "false-life", "sleep", "meteor-swarm"]
-
+    const {favourites} = useContext(AuthContext);
     function handleDelete(spell) {
         console.log({spell} + " was deleted!");
     }
