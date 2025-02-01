@@ -21,7 +21,7 @@ const {isLoggedIn} = useContext(AuthContext);
           <Route path="/spells" element={isLoggedIn ? <Catalogue/> : <Navigate to="/account"/>}/>
           <Route path="/favourites" element={isLoggedIn ? <Favourites/> : <Navigate to="/account"/>}/>
           <Route path="/spells/search/:searchTerm" element={isLoggedIn ? <SearchResults/> : <Navigate to="/account"/>}/>
-          <Route path="/account" element={<Account/>}/>
+          <Route path="/account" element={!isLoggedIn ? <Account/> : <Navigate to="/"/>}/>
           <Route path="*" element={<NotFound/>}/>
           <Route path="/spells/:id" element={isLoggedIn ? <SpellPage/> : <Navigate to="/account"/>}/>
       </Routes>
