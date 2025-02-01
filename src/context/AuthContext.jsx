@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {jwtDecode} from "jwt-decode";
 
 export const AuthContext = createContext({});
 
@@ -16,6 +17,7 @@ function AuthContextProvider({children}) {
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState("");
     const [loginError, setLoginError] = useState("");
+    const [registerComment, setRegisterComment] = useState("")
 
     function loginUser(loginInput) {
         console.log(loginInput);
@@ -30,6 +32,8 @@ function AuthContextProvider({children}) {
                 console.log(response);
                 const token = response.data.jwt;
                 localStorage.setItem("authToken", token)
+                const decoded = jwtDecode(token);
+                console.log(decoded);
                 setIsLoggedIn(prevState => ({
                     ...prevState,
                     loggedIn: true,
@@ -37,7 +41,7 @@ function AuthContextProvider({children}) {
                         username: loginInput.username,
                     }
                 }));
-                navigate("/");
+                // navigate("/");
             } catch (e) {
                 console.error(e);
                 setLoginError("User not found");
@@ -56,7 +60,7 @@ function AuthContextProvider({children}) {
                 email: "",
             }
         })
-
+        localStorage.removeItem("authToken");
     }
 
     function registerUser(registerInput) {
@@ -81,15 +85,7 @@ function AuthContextProvider({children}) {
                     }
                 );
                 console.log(response);
-                setIsLoggedIn(prevState => ({
-                    ...prevState,
-                    loggedIn: true,
-                    user: {
-                        username: registerInput.username,
-                        email: registerInput.email,
-                    }
-                }));
-                navigate("/");
+                setRegisterComment("Registered succesfully! Please log in.")
             } catch (e) {
                 console.error(e);
                 setRegisterError("User already exists");
@@ -101,24 +97,33 @@ function AuthContextProvider({children}) {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem("AuthToken")
-        if (token) {
+        const token = localStorage.getItem("authToken");
+        // if (token) {
             async function retrieveUserInfo() {
+                const decoded = jwtDecode(token);
+                console.log(decoded);
                 try {
-                    const response = await axios.get(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}/info`, {
+                    const response = await axios.get(`https://api.datavortex.nl/spellbook/users/${decoded.sub}`, {
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`,
                         }
                     })
-                    console.log(response)
+                    console.log(response);
+                    setIsLoggedIn({
+                        loggedIn: true,
+                        user: {
+                            username: response.data.username,
+                            info: response.data.info,
+                        }
+                    })
                 } catch(e) {
                     console.error(e);
                 }
             }
             retrieveUserInfo();
-        }
-    }, [isLoggedIn]);
+        // }
+    }, []);
 
     return (
         <AuthContext.Provider value={{
@@ -130,6 +135,7 @@ function AuthContextProvider({children}) {
             registerUser: registerUser,
             registerError: registerError,
             loginError: loginError,
+            registerComment: registerComment,
         }
         }>
             {children}
