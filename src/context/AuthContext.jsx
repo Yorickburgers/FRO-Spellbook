@@ -67,11 +67,11 @@ function AuthContextProvider({children}) {
         async function registerNewUser() {
             setRegisterError("");
             try {
-                const response = await axios.post("https://api.datavortex.nl/spellbook/users", {
+                await axios.post("https://api.datavortex.nl/spellbook/users", {
                         "username": registerInput.username,
                         "password": registerInput.password,
                         "email": registerInput.email,
-                        "info": "test",
+                        "info": "",
                         "authorities": [
                             {
                                 "authority": "USER"
@@ -84,7 +84,6 @@ function AuthContextProvider({children}) {
                         }
                     }
                 );
-                console.log(response);
                 setRegisterComment("Registered succesfully! Please log in.")
             } catch (e) {
                 console.error(e);
@@ -112,7 +111,6 @@ function AuthContextProvider({children}) {
                         },
                         signal: controller.signal,
                     })
-                    console.log(response);
                     setIsLoggedIn({
                         loggedIn: true,
                         user: {
