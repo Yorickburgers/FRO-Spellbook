@@ -103,8 +103,8 @@ function AuthContextProvider({children}) {
     useEffect(() => {
         const controller = new AbortController();
         const token = localStorage.getItem("authToken");
-        const decoded = jwtDecode(token);
-        const expDate = decoded.exp;
+        const decoded = token ? jwtDecode(token) : null;
+        const expDate = decoded?.exp || 0;
         const currentDate = Math.floor(Date.now() / 1000);
         if (expDate >= currentDate) {
             async function retrieveUserInfo() {
@@ -196,25 +196,26 @@ function AuthContextProvider({children}) {
         const token = localStorage.getItem("authToken");
 
         async function changeUserInfo() {
-            try {
-                const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
-                        username: isLoggedIn.user.username,
-                        password: isLoggedIn.user.password,
-                        email: isLoggedIn.user.email,
-                        info: favourites.join("&"),
+            if (isLoggedIn.loggedIn) {
+                try {
+                    const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
+                            username: isLoggedIn.user.username,
+                            password: isLoggedIn.user.password,
+                            email: isLoggedIn.user.email,
+                            info: favourites.join("&"),
+                        }
+                        , {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            },
+                            signal: controller.signal,
+                        }
+                    );
+                } catch (e) {
+                    if (e.name !== "CanceledError") {
+                        console.error(e);
                     }
-                    , {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                        },
-                        signal: controller.signal,
-                    }
-                );
-                console.log(response);
-            } catch (e) {
-                if (e.name !== "CanceledError") {
-                    console.error(e);
                 }
             }
         }

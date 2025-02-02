@@ -57,11 +57,11 @@ function Account() {
                     <form className="account-form" onSubmit={(e) => handleLoginSubmit(e)}>
                         <label className="account-label" htmlFor="login-username">Username:
                             <input type="text" className="accountInput" id="login-username" name="username"
-                                   onChange={handleLoginChange} value={loginInput.username}/>
+                                   onChange={handleLoginChange} value={loginInput.username} required={true}/>
                         </label>
                         <label className="account-label" htmlFor="login-password">Password:
                             <input type="password" className="accountInput" id="login-password" name="password"
-                                   onChange={handleLoginChange} value={loginInput.password}/>
+                                   onChange={handleLoginChange} value={loginInput.password} required={true}/>
                         </label>
                         <h3 className="register-message">{registerComment || "Don't have an account? Register a new one!"}</h3>
                         <button type="submit" className="button">
@@ -79,19 +79,20 @@ function Account() {
                     <form className="account-form" onSubmit={(e) => handleRegisterSubmit(e)}>
                         <label className="account-label" htmlFor="email">Email:
                             <input type="email" id="email" name="email" className="accountInput"
-                                   onChange={handleRegisterChange} value={registerInput.email}/>
+                                   onChange={handleRegisterChange} value={registerInput.email} pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must contain an @-sign, and a domain" required={true}/>
                         </label>
                         <label className="account-label" htmlFor="register-username">Username:
                             <input type="text" id="register-username" name="username" className="accountInput"
-                                   onChange={handleRegisterChange} value={registerInput.username}/>
+                                   onChange={handleRegisterChange} value={registerInput.username}  pattern=".{8,}" title="Must contain at least 8 characters" required={true}/>
                         </label>
                         <label className="account-label" htmlFor="register-password">Password:
                             <input type="password" id="register-password" name="password" className="accountInput"
-                                   onChange={handleRegisterChange} value={registerInput.password}/>
+                                   onChange={handleRegisterChange} value={registerInput.password} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}"
+                                   title="Must contain at least one number and one uppercase and lowercase letter, and between 8 and 16 characters" required={true}/>
                         </label>
                         <label className="account-label" htmlFor="confirm">Confirm password:
                             <input type="password" id="confirm" name="confirm" className="accountInput"
-                                   onChange={handleRegisterChange} value={registerInput.confirm}/>
+                                   onChange={handleRegisterChange} value={registerInput.confirm} required={true}/>
                         </label>
                         <button type="submit"
                                 className={`button ${registerInput.password !== registerInput.confirm ? " disabled" : ""}`}
