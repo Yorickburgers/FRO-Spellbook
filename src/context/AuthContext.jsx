@@ -23,15 +23,16 @@ function AuthContextProvider({children}) {
     const [favourites, setFavourites] = useState([]);
 
     function loginUser(loginInput) {
+        console.log(loginInput);
         async function checkLoginUser() {
-            setLoginError("")
+            setLoginError("");
             try {
                 const response = await axios.post("https://api.datavortex.nl/spellbook/users/authenticate", {
                     "username": loginInput.username,
                     "password": loginInput.password,
                 });
                 const token = response.data.jwt;
-                localStorage.setItem("authToken", token)
+                localStorage.setItem("authToken", token);
 
                 setIsLoggedIn(prevState => ({
                     ...prevState,
@@ -122,7 +123,7 @@ function AuthContextProvider({children}) {
                             "Authorization": `Bearer ${token}`,
                         },
                         signal: controller.signal,
-                    })
+                    });
                     setIsLoggedIn({
                         loggedIn: true,
                         user: {
@@ -133,6 +134,7 @@ function AuthContextProvider({children}) {
                         },
                         status: "done",
                     })
+                    console.log(response);
                 } catch (e) {
                     if (e.name !== "CanceledError") {
                         console.error(e);
@@ -208,7 +210,7 @@ function AuthContextProvider({children}) {
                     const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
                             username: isLoggedIn.user.username,
                             password: isLoggedIn.user.password,
-                            // email: isLoggedIn.user.email,
+                            email: isLoggedIn.user.email,
                             info: favourites.join("&"),
                         }
                         , {
