@@ -1,7 +1,7 @@
 import './CatalogueItem.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
     const [spellDetails, setSpellDetails] = useState({});
@@ -72,7 +72,7 @@ function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
         const range = spellDetails.range || " ";
 
         return (
-            <NavLink className="catalogueLink" to={`/spells/${index}`}>
+            <Link className="catalogueLink" to={`/spells/${index}`}>
                 <li className="catalogue-item" key={index}>
                     <p className="catalogue-name">{name}</p>
                     <p className="catalogue-classes">{classes}</p>
@@ -81,7 +81,7 @@ function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
                     <p className="catalogue-cast">{castTime}</p>
                     <p className="catalogue-range">{range}</p>
                 </li>
-            </NavLink>
+            </Link>
         )
     }
 }

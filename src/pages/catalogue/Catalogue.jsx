@@ -1,9 +1,10 @@
 import './Catalogue.css';
 import SortButton from "../../components/sortButton/SortButton.jsx";
 import CatalogueItem from "../../components/catalogueItem/CatalogueItem.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import FilterTab from "../../components/filterTab/FilterTab.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Catalogue() {
     const [spells, setSpells] = useState([]);
@@ -81,7 +82,8 @@ function Catalogue() {
     })
     const [renderedSpells, setRenderedSpells] = useState([]);
     const [showClasses, setShowClasses] = useState(false);
-    const [selectedClass, setSelectedClass] = useState("")
+    const [selectedClass, setSelectedClass] = useState("");
+    const {favourites} = useContext(AuthContext);
 
 
     useEffect(() => {
@@ -358,33 +360,47 @@ function Catalogue() {
                         />
                     </div>
                     <ul className="catalogue-list">
-                        {sortedSpells.length > 0
-                            ? sortedSpells.map((spell) => (
-                                <CatalogueItem
-                                    name={spell.name}
-                                    index={spell.index}
-                                    url={spell.url}
-                                    key={spell.index}
-                                    filters={filters}
-                                    handleSpellDetails={handleSpellDetails}
-                                />
-                            ))
-                            : spells.map((spell) => (
-                                <CatalogueItem
-                                    name={spell.name}
-                                    index={spell.index}
-                                    url={spell.url}
-                                    key={spell.index}
-                                    filters={filters}
-                                    handleSpellDetails={handleSpellDetails}
-                                />
-                            ))}
-                    </ul>
-                </div>
-                <div className={`position-dummy ${tabOpen ? "open" : ""}`}></div>
+                        {favourites.length > 0 && <><li className="catalogue-header">{favourites.length} {favourites.length === 1 ? "favourite spell" : "favourite spells"}</li>
+                        {favourites.map((spell) => (
+                            <CatalogueItem
+                                name={(spell.charAt(0).toUpperCase() + spell.slice(1)).replaceAll("-", " ")}
+                                index={spell}
+                                url={`/api/spells/${spell}`}
+                                key={spell}
+                                filters={filters}
+                                handleSpellDetails={handleSpellDetails}
+                            />
+                            ))}</>
+                        }
+                    <li className="catalogue-header">{renderedSpells.length} {renderedSpells.length === 1 ? "result" : "results"}</li>
+                    {sortedSpells.length > 0
+                    ? sortedSpells.map((spell) => (
+                    <CatalogueItem
+                        name={spell.name}
+                        index={spell.index}
+                        url={spell.url}
+                        key={spell.index}
+                        filters={filters}
+                        handleSpellDetails={handleSpellDetails}
+                    />
+                    ))
+                    : spells.map((spell) => (
+                    <CatalogueItem
+                        name={spell.name}
+                        index={spell.index}
+                        url={spell.url}
+                        key={spell.index}
+                        filters={filters}
+                        handleSpellDetails={handleSpellDetails}
+                    />
+                    ))}
+                </ul>
             </div>
-        </main>
-    );
+            <div className={`position-dummy ${tabOpen ? "open" : ""}`}></div>
+        </div>
+</main>
+)
+    ;
 }
 
 export default Catalogue;
