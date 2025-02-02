@@ -79,8 +79,8 @@ function Catalogue() {
             str: false,
             wis: false,
         },
-        includes: ""
-    })
+        includes: "",
+    });
     const [renderedSpells, setRenderedSpells] = useState([]);
     const [showClasses, setShowClasses] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
@@ -310,7 +310,8 @@ function Catalogue() {
                     tabOpen={tabOpen}
                     setTabOpen={setTabOpen}
                     filters={filters}
-                    toggleFilters={toggleFilters}/>
+                    toggleFilters={toggleFilters}
+                />
                 <div className="catalogue">
                     <div className="sorting-tags-container">
                         <SortButton

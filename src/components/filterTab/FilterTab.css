@@ -45,3 +45,8 @@
     cursor: pointer;
     z-index: -1;
 }
+
+.reset-button {
+    display: inline;
+    align-self: end;
+}

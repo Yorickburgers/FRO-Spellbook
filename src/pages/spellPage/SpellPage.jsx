@@ -21,7 +21,7 @@ function SpellPage() {
         dc: false,
         healing: false,
         damage: false,
-    })
+    });
     const [tabOpen, setTabOpen] = useState(false);
     const {favourites, setFavourites} = useContext(AuthContext);
 
