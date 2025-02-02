@@ -54,6 +54,7 @@ function Catalogue() {
             action: false,
             "bonus action": false,
             timed: false,
+            reaction: false,
         },
         range: {
             touch: false,
@@ -372,7 +373,7 @@ function Catalogue() {
                             />
                             ))}</>
                         }
-                    <li className="catalogue-header">{renderedSpells.length} {renderedSpells.length === 1 ? "result" : "results"}</li>
+                    <li className="catalogue-header">{renderedSpells.length} {renderedSpells.length === 1 ? "result out of 319 total spells" : "results out of 319 total spells"}</li>
                     {sortedSpells.length > 0
                     ? sortedSpells.map((spell) => (
                     <CatalogueItem

@@ -41,7 +41,7 @@ function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
             const levelMatch = !isCategoryFiltered("level", filters) || filters.level[spellDetails.level] || false;
             const typeMatch = !isCategoryFiltered("type", filters) || filters.type[spellDetails?.damage?.damage_type?.name.toLowerCase()] || (filters.type.healing && Object.keys(spellDetails).includes("heal_at_slot_level")) || false;
             const classMatch = !isCategoryFiltered("classes", filters) || spellDetails.classes?.some(cls => filters.classes[cls.name.toLowerCase()]) || false;
-            const timeMatch = !isCategoryFiltered("castTime", filters) || (filters.castTime.action && spellDetails.casting_time === "1 action") || (filters.castTime["bonus action"] && spellDetails.casting_time === "1 bonus action") || (filters.castTime.timed && spellDetails.casting_time.includes("hour" || "minute")) || false;
+            const timeMatch = !isCategoryFiltered("castTime", filters) || (filters.castTime.action && spellDetails.casting_time === "1 action") || (filters.castTime["bonus action"] && spellDetails.casting_time === "1 bonus action") || (filters.castTime.timed && (spellDetails.casting_time.includes("hour") || spellDetails.casting_time.includes("minute"))) || (filters.castTime["reaction"] && spellDetails.casting_time === "1 reaction")|| false;
             const attackMatch = !isCategoryFiltered("attack", filters) || filters.attack[spellDetails.attack_type] || false;
             const rangeMatch = !isCategoryFiltered("range", filters) || filters.range[spellDetails.range.toLowerCase()] || false;
             const dcTypeMatch = !isCategoryFiltered("dcType", filters) || filters.dcType[spellDetails?.dc?.dc_type?.index] || false;

@@ -55,7 +55,7 @@ function handleChange(e) {
                     ))}
                 </CollapsableListItem>
                 <CollapsableListItem name="casting time">
-                    {["action", "bonus action", "timed"].map(time => (
+                    {["action", "bonus action", "reaction", "timed"].map(time => (
                         <FilterOption
                             key={time}
                             type="checkbox"
