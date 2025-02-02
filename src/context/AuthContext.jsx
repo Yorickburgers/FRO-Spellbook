@@ -127,7 +127,9 @@ function AuthContextProvider({children}) {
                         status: "done",
                     })
                 } catch (e) {
-                    console.error(e);
+                    if (e.name !== "CanceledError") {
+                        console.error(e);
+                    }
                 }
             }
 
@@ -170,7 +172,9 @@ function AuthContextProvider({children}) {
                         }
                     }));
                 } catch (e) {
-                    console.error(e);
+                    if (e.name !== "CanceledError") {
+                        console.error(e);
+                    }
                 }
             }
 
@@ -209,7 +213,9 @@ function AuthContextProvider({children}) {
                 );
                 console.log(response);
             } catch (e) {
-                console.error(e);
+                if (e.name !== "CanceledError") {
+                    console.error(e);
+                }
             }
         }
 

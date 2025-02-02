@@ -35,8 +35,10 @@ function SpellPage() {
                 });
                 setSpellDetails(response.data);
             } catch (e) {
-                console.error(e);
-                if (e.response && e.response.status === 404) {
+                if (e?.name !== "CanceledError") {
+                    console.error(e);
+                }
+                if (e?.response && e?.response.status === 404) {
                     navigate("*");
                 }
             } finally {

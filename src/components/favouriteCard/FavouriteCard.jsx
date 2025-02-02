@@ -18,7 +18,9 @@ function FavouriteCard({index, handleDelete}) {
                 });
                 setSpellDetails(response.data);
             } catch (e) {
-                console.error(e);
+                if (e.name !== "CanceledError") {
+                    console.error(e);
+                }
             } finally {
                 setLoading(false);
             }

@@ -27,7 +27,9 @@ function Navigation() {
                 });
                 setAllSpells(response.data.results);
             } catch (e) {
-                console.error(e);
+                if (e.name !== "CanceledError") {
+                    console.error(e);
+                }
             } finally {
                 setLoading(false);
             }
