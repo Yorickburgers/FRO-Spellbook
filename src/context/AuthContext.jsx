@@ -63,6 +63,8 @@ function AuthContextProvider({children}) {
             user: {
                 username: "",
                 info: "",
+                password: "",
+                email: "",
             }
         })
         localStorage.removeItem("authToken");
@@ -106,8 +108,13 @@ function AuthContextProvider({children}) {
         const decoded = token ? jwtDecode(token) : null;
         const expDate = decoded?.exp || 0;
         const currentDate = Math.floor(Date.now() / 1000);
+        setIsLoggedIn({
+            ...isLoggedIn,
+            status: "pending",
+        });
         if (expDate >= currentDate) {
             async function retrieveUserInfo() {
+                console.log("retrieving user-info...");
                 try {
                     const response = await axios.get(`https://api.datavortex.nl/spellbook/users/${decoded.sub}`, {
                         headers: {
@@ -137,7 +144,7 @@ function AuthContextProvider({children}) {
             setIsLoggedIn({
                 ...isLoggedIn,
                 status: "done",
-            })
+            });
         } else {
             setIsLoggedIn({
                 ...isLoggedIn,
@@ -201,7 +208,7 @@ function AuthContextProvider({children}) {
                     const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
                             username: isLoggedIn.user.username,
                             password: isLoggedIn.user.password,
-                            email: isLoggedIn.user.email,
+                            // email: isLoggedIn.user.email,
                             info: favourites.join("&"),
                         }
                         , {
@@ -241,7 +248,7 @@ function AuthContextProvider({children}) {
             setFavourites: setFavourites,
         }
         }>
-            {isLoggedIn.status === "done" && children}
+            {isLoggedIn.status === "done" ? children : <p>Pending...</p>}
         </AuthContext.Provider>
     )
 }
