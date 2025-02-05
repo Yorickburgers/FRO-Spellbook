@@ -207,7 +207,7 @@ function AuthContextProvider({children}) {
         async function changeUserInfo() {
             if (isLoggedIn.loggedIn) {
                 try {
-                    const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
+                    await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
                             username: isLoggedIn.user.username,
                             password: isLoggedIn.user.password,
                             email: isLoggedIn.user.email,
