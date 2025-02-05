@@ -157,7 +157,7 @@ function AuthContextProvider({children}) {
         return function cleanup() {
             controller.abort();
         }
-    }, []);
+    }, [isLoggedIn.loggedIn]);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -222,7 +222,7 @@ function AuthContextProvider({children}) {
                         }
                     );
                 } catch (e) {
-                    if (e.name !== "CanceledError" && e.status !== 409) {
+                    if (e.name !== "CanceledError") {
                         console.error(e);
                     }
                 }
