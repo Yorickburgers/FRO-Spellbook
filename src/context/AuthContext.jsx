@@ -23,7 +23,7 @@ function AuthContextProvider({children}) {
     const [favourites, setFavourites] = useState([]);
 
     function loginUser(loginInput) {
-        console.log(loginInput);
+        // console.log(loginInput);
         async function checkLoginUser() {
             setLoginError("");
             try {
@@ -134,7 +134,7 @@ function AuthContextProvider({children}) {
                         },
                         status: "done",
                     })
-                    console.log(response);
+                    // console.log(response);
                 } catch (e) {
                     if (e.name !== "CanceledError") {
                         console.error(e);
@@ -222,7 +222,7 @@ function AuthContextProvider({children}) {
                         }
                     );
                 } catch (e) {
-                    if (e.name !== "CanceledError") {
+                    if (e.name !== "CanceledError" && e.status !== 409) {
                         console.error(e);
                     }
                 }

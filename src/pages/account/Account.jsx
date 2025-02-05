@@ -61,7 +61,7 @@ function Account() {
                         </label>
                         <label className="account-label" htmlFor="login-password">Password:
                             <input type="password" className="accountInput" id="login-password" name="password"
-                                   onChange={handleLoginChange} value={loginInput.password} required={false}/>
+                                   onChange={handleLoginChange} value={loginInput.password} required={true}/>
                         </label>
                         <h3 className="register-message">{registerComment || "Don't have an account? Register a new one!"}</h3>
                         <button type="submit" className="button">
