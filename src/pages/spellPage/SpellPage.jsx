@@ -1,8 +1,9 @@
 import './SpellPage.css';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import HideTab from "../../components/hideTab/HideTab.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function SpellPage() {
     const {id} = useParams();
@@ -20,8 +21,9 @@ function SpellPage() {
         dc: false,
         healing: false,
         damage: false,
-    })
+    });
     const [tabOpen, setTabOpen] = useState(false);
+    const {favourites, setFavourites} = useContext(AuthContext);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -33,8 +35,10 @@ function SpellPage() {
                 });
                 setSpellDetails(response.data);
             } catch (e) {
-                console.error(e);
-                if (e.response && e.response.status === 404) {
+                if (e?.name !== "CanceledError") {
+                    console.error(e);
+                }
+                if (e?.response && e?.response.status === 404) {
                     navigate("*");
                 }
             } finally {
@@ -48,6 +52,14 @@ function SpellPage() {
             controller.abort();
         }
     }, [id, navigate]);
+
+    const toggleFavourite = (id) => {
+        setFavourites(prevFavourites =>
+            prevFavourites.includes(id)
+                ? prevFavourites.filter(fav => fav !== id)
+                : [...prevFavourites, id].sort()
+        );
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -80,7 +92,8 @@ function SpellPage() {
                     toggleHidden={toggleHidden}/>
                 <article className="spell-details-container printed">
                     <div className="spell-name-container">
-                        <p className="star" onClick={(e) => e.target.classList.toggle("favourited")}>★</p>
+                        <p className={`star ${favourites.includes(id) ? "favourited" : ""}`}
+                           onClick={() => toggleFavourite(id)}>★</p>
                         <h1 className="spell-name">{spellDetails.name}</h1>
                         <button
                             type="button"

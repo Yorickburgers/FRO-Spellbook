@@ -11,28 +11,34 @@ function AuthContextProvider({children}) {
         user: {
             username: "",
             info: "",
+            password: "",
+            email: "",
         },
         status: "pending",
-    })
+    });
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState("");
     const [loginError, setLoginError] = useState("");
-    const [registerComment, setRegisterComment] = useState("")
+    const [registerComment, setRegisterComment] = useState("");
+    const [favourites, setFavourites] = useState([]);
 
     function loginUser(loginInput) {
+        // console.log(loginInput);
         async function checkLoginUser() {
-            setLoginError("")
+            setLoginError("");
             try {
                 const response = await axios.post("https://api.datavortex.nl/spellbook/users/authenticate", {
                     "username": loginInput.username,
                     "password": loginInput.password,
                 });
                 const token = response.data.jwt;
-                localStorage.setItem("authToken", token)
+                localStorage.setItem("authToken", token);
+
                 setIsLoggedIn(prevState => ({
                     ...prevState,
                     loggedIn: true,
                     user: {
+                        ...prevState.user,
                         username: loginInput.username,
                     }
                 }));
@@ -58,6 +64,8 @@ function AuthContextProvider({children}) {
             user: {
                 username: "",
                 info: "",
+                password: "",
+                email: "",
             }
         })
         localStorage.removeItem("authToken");
@@ -98,11 +106,16 @@ function AuthContextProvider({children}) {
     useEffect(() => {
         const controller = new AbortController();
         const token = localStorage.getItem("authToken");
-        const decoded = jwtDecode(token);
-        const expDate = decoded.exp;
+        const decoded = token ? jwtDecode(token) : null;
+        const expDate = decoded?.exp || 0;
         const currentDate = Math.floor(Date.now() / 1000);
+        setIsLoggedIn({
+            ...isLoggedIn,
+            status: "pending",
+        });
         if (expDate >= currentDate) {
             async function retrieveUserInfo() {
+                console.log("retrieving user-info...");
                 try {
                     const response = await axios.get(`https://api.datavortex.nl/spellbook/users/${decoded.sub}`, {
                         headers: {
@@ -110,17 +123,22 @@ function AuthContextProvider({children}) {
                             "Authorization": `Bearer ${token}`,
                         },
                         signal: controller.signal,
-                    })
+                    });
                     setIsLoggedIn({
                         loggedIn: true,
                         user: {
                             username: response.data.username,
                             info: response.data.info,
+                            password: response.data.password,
+                            email: response.data.email,
                         },
                         status: "done",
                     })
+                    // console.log(response);
                 } catch (e) {
-                    console.error(e);
+                    if (e.name !== "CanceledError") {
+                        console.error(e);
+                    }
                 }
             }
 
@@ -128,7 +146,7 @@ function AuthContextProvider({children}) {
             setIsLoggedIn({
                 ...isLoggedIn,
                 status: "done",
-            })
+            });
         } else {
             setIsLoggedIn({
                 ...isLoggedIn,
@@ -141,6 +159,83 @@ function AuthContextProvider({children}) {
         }
     }, []);
 
+    useEffect(() => {
+        const controller = new AbortController();
+        const token = localStorage.getItem("authToken");
+
+        if (token && isLoggedIn.loggedIn && isLoggedIn.user.username) {
+            async function retrieveInfo() {
+                try {
+                    const responseInfo = await axios.get(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}/info`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        signal: controller.signal,
+                    });
+                    setIsLoggedIn(prevState => ({
+                        ...prevState,
+                        user: {
+                            ...prevState.user,
+                            info: responseInfo.data,
+                        }
+                    }));
+                } catch (e) {
+                    if (e.name !== "CanceledError") {
+                        console.error(e);
+                    }
+                }
+            }
+
+            retrieveInfo();
+        }
+
+        return function cleanup() {
+            controller.abort();
+        }
+    }, [isLoggedIn.loggedIn, isLoggedIn.user.username]);
+
+    useEffect(() => {
+
+        setFavourites((isLoggedIn.user.info).split("&").filter(item => item !== "").sort());
+    }, [isLoggedIn.user.info]);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        const token = localStorage.getItem("authToken");
+
+        async function changeUserInfo() {
+            if (isLoggedIn.loggedIn) {
+                try {
+                    const response = await axios.put(`https://api.datavortex.nl/spellbook/users/${isLoggedIn.user.username}`, {
+                            username: isLoggedIn.user.username,
+                            password: isLoggedIn.user.password,
+                            email: isLoggedIn.user.email,
+                            info: favourites.join("&"),
+                        }
+                        , {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            },
+                            signal: controller.signal,
+                        }
+                    );
+                } catch (e) {
+                    if (e.name !== "CanceledError" && e.status !== 409) {
+                        console.error(e);
+                    }
+                }
+            }
+        }
+
+        changeUserInfo();
+
+        return function cleanup() {
+            controller.abort();
+        }
+    }, [favourites]);
+
     return (
         <AuthContext.Provider value={{
             isLoggedIn: isLoggedIn.loggedIn,
@@ -151,9 +246,11 @@ function AuthContextProvider({children}) {
             registerError: registerError,
             loginError: loginError,
             registerComment: registerComment,
+            favourites: favourites,
+            setFavourites: setFavourites,
         }
         }>
-            {isLoggedIn.status === "done" && children}
+            {isLoggedIn.status === "done" ? children : <p>Pending...</p>}
         </AuthContext.Provider>
     )
 }

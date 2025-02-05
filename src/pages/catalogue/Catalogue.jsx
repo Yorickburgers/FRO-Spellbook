@@ -1,9 +1,10 @@
 import './Catalogue.css';
 import SortButton from "../../components/sortButton/SortButton.jsx";
 import CatalogueItem from "../../components/catalogueItem/CatalogueItem.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import FilterTab from "../../components/filterTab/FilterTab.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Catalogue() {
     const [spells, setSpells] = useState([]);
@@ -53,6 +54,7 @@ function Catalogue() {
             action: false,
             "bonus action": false,
             timed: false,
+            reaction: false,
         },
         range: {
             touch: false,
@@ -77,11 +79,12 @@ function Catalogue() {
             str: false,
             wis: false,
         },
-        includes: ""
-    })
+        includes: "",
+    });
     const [renderedSpells, setRenderedSpells] = useState([]);
     const [showClasses, setShowClasses] = useState(false);
-    const [selectedClass, setSelectedClass] = useState("")
+    const [selectedClass, setSelectedClass] = useState("");
+    const {favourites} = useContext(AuthContext);
 
 
     useEffect(() => {
@@ -94,7 +97,9 @@ function Catalogue() {
                 });
                 setSpells(response.data.results);
             } catch (e) {
-                console.error(e)
+                if (e.name !== "CanceledError") {
+                    console.error(e)
+                }
             } finally {
                 setLoading(false);
             }
@@ -118,10 +123,6 @@ function Catalogue() {
             return prevState;
         });
     };
-
-    useEffect(() => {
-        console.log(renderedSpells);
-    }, [renderedSpells]);
 
     useEffect(() => {
         setRenderedSpells([]);
@@ -209,23 +210,32 @@ function Catalogue() {
         });
 
         setSortedSpells(sorted);
-        console.log(sorted);
     };
 
     const sortByCastingTime = () => {
         const sorted = [...renderedSpells].sort((a, b) => {
             const getCastingTimeIndex = (time) => {
                 switch (time) {
-                    case "1 reaction": return 0;
-                    case "1 bonus action": return 1;
-                    case "1 action": return 2;
-                    case "1 minute": return 3;
-                    case "10 minutes": return 4;
-                    case "1 hour": return 5;
-                    case "8 hours": return 6;
-                    case "12 hours": return 6.5;
-                    case "24 hours": return 7;
-                    default: return 8;
+                    case "1 reaction":
+                        return 0;
+                    case "1 bonus action":
+                        return 1;
+                    case "1 action":
+                        return 2;
+                    case "1 minute":
+                        return 3;
+                    case "10 minutes":
+                        return 4;
+                    case "1 hour":
+                        return 5;
+                    case "8 hours":
+                        return 6;
+                    case "12 hours":
+                        return 6.5;
+                    case "24 hours":
+                        return 7;
+                    default:
+                        return 8;
                 }
             };
 
@@ -241,23 +251,40 @@ function Catalogue() {
         const sorted = [...renderedSpells].sort((a, b) => {
             const getRangeIndex = (range) => {
                 switch (range) {
-                    case "Self": return -1;
-                    case "Touch": return 0;
-                    case "5 feet": return 1;
-                    case "10 feet": return 2;
-                    case "30 feet": return 3;
-                    case "60 feet": return 4;
-                    case "90 feet": return 5;
-                    case "100 feet": return 5.5;
-                    case "120 feet": return 6;
-                    case "150 feet": return 7;
-                    case "300 feet": return 8;
-                    case "500 feet": return 9;
-                    case "Sight": return 9.5;
-                    case "1 mile": return 10;
-                    case "500 miles": return 11;
-                    case "Unlimited": return 12;
-                    default: return 500;
+                    case "Self":
+                        return -1;
+                    case "Touch":
+                        return 0;
+                    case "5 feet":
+                        return 1;
+                    case "10 feet":
+                        return 2;
+                    case "30 feet":
+                        return 3;
+                    case "60 feet":
+                        return 4;
+                    case "90 feet":
+                        return 5;
+                    case "100 feet":
+                        return 5.5;
+                    case "120 feet":
+                        return 6;
+                    case "150 feet":
+                        return 7;
+                    case "300 feet":
+                        return 8;
+                    case "500 feet":
+                        return 9;
+                    case "Sight":
+                        return 9.5;
+                    case "1 mile":
+                        return 10;
+                    case "500 miles":
+                        return 11;
+                    case "Unlimited":
+                        return 12;
+                    default:
+                        return 500;
                 }
             };
 
@@ -280,10 +307,11 @@ function Catalogue() {
             <h1 className="page-title">Catalogue</h1>
             <div className="spell-outer-container">
                 <FilterTab
-                tabOpen={tabOpen}
-                setTabOpen={setTabOpen}
-                filters={filters}
-                toggleFilters={toggleFilters}/>
+                    tabOpen={tabOpen}
+                    setTabOpen={setTabOpen}
+                    filters={filters}
+                    toggleFilters={toggleFilters}
+                />
                 <div className="catalogue">
                     <div className="sorting-tags-container">
                         <SortButton
@@ -302,7 +330,8 @@ function Catalogue() {
                                 value={selectedClass}
                                 onChange={(e) => {
                                     setSelectedClass(e.target.value)
-                                    setShowClasses(!showClasses)}}
+                                    setShowClasses(!showClasses)
+                                }}
                             >
                                 {classOptions.map((cls) => (
                                     <option key={cls} value={cls} className="class-suggestion">
@@ -333,33 +362,47 @@ function Catalogue() {
                         />
                     </div>
                     <ul className="catalogue-list">
-                        {sortedSpells.length > 0
-                            ? sortedSpells.map((spell) => (
+                        {favourites.length > 0 && <><li className="catalogue-header">{favourites.length} {favourites.length === 1 ? "favourite spell" : "favourite spells"}</li>
+                        {favourites.map((spell) => (
                             <CatalogueItem
-                                name={spell.name}
-                                index={spell.index}
-                                url={spell.url}
-                                key={spell.index}
+                                name={(spell.charAt(0).toUpperCase() + spell.slice(1)).replaceAll("-", " ")}
+                                index={spell}
+                                url={`/api/spells/${spell}`}
+                                key={spell}
                                 filters={filters}
                                 handleSpellDetails={handleSpellDetails}
                             />
-                            ))
-                                : spells.map((spell) => (
-                                <CatalogueItem
-                                    name={spell.name}
-                                    index={spell.index}
-                                    url={spell.url}
-                                    key={spell.index}
-                                    filters={filters}
-                                    handleSpellDetails={handleSpellDetails}
-                                />
-                        ))}
-                    </ul>
-                </div>
-                <div className={`position-dummy ${tabOpen ? "open" : ""}`}></div>
+                            ))}</>
+                        }
+                    <li className="catalogue-header">{renderedSpells.length} {renderedSpells.length === 1 ? "result out of 319 total spells" : "results out of 319 total spells"}</li>
+                    {sortedSpells.length > 0
+                    ? sortedSpells.map((spell) => (
+                    <CatalogueItem
+                        name={spell.name}
+                        index={spell.index}
+                        url={spell.url}
+                        key={spell.index}
+                        filters={filters}
+                        handleSpellDetails={handleSpellDetails}
+                    />
+                    ))
+                    : spells.map((spell) => (
+                    <CatalogueItem
+                        name={spell.name}
+                        index={spell.index}
+                        url={spell.url}
+                        key={spell.index}
+                        filters={filters}
+                        handleSpellDetails={handleSpellDetails}
+                    />
+                    ))}
+                </ul>
             </div>
-        </main>
-    );
+            <div className={`position-dummy ${tabOpen ? "open" : ""}`}></div>
+        </div>
+</main>
+)
+    ;
 }
 
 export default Catalogue;

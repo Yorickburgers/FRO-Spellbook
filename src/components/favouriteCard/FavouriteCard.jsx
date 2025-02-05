@@ -1,7 +1,8 @@
 import './FavouriteCard.css';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function FavouriteCard({index, handleDelete}) {
    const [spellDetails, setSpellDetails] = useState({});
@@ -17,7 +18,9 @@ function FavouriteCard({index, handleDelete}) {
                 });
                 setSpellDetails(response.data);
             } catch (e) {
-                console.error(e);
+                if (e.name !== "CanceledError") {
+                    console.error(e);
+                }
             } finally {
                 setLoading(false);
             }
@@ -50,7 +53,7 @@ function FavouriteCard({index, handleDelete}) {
                 {!dmgHealType && <p>Support</p>}
                 <p>Level: {spellDetails.level}</p>
             </div>
-            <button type="button" className="button" onClick={() => handleDelete({index})}>Remove from favourites</button>
+            <button type="button" className="button" onClick={() => handleDelete(index)}>Remove from favourites</button>
         </article>
     );
 }

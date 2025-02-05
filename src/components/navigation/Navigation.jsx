@@ -27,7 +27,9 @@ function Navigation() {
                 });
                 setAllSpells(response.data.results);
             } catch (e) {
-                console.error(e);
+                if (e.name !== "CanceledError") {
+                    console.error(e);
+                }
             } finally {
                 setLoading(false);
             }
@@ -71,9 +73,9 @@ function Navigation() {
             </span>
             </section>
             <section className="outer-nav-container center">
-                <NavLink className="navLink" to="/">Home</NavLink>
-                <NavLink className="navLink" to="/spells">Catalogue</NavLink>
-                <NavLink className="navLink" to="/favourites">Favourites</NavLink>
+                <NavLink className={({ isActive }) => isActive ? "navLink active" : "navLink"} to="/">Home</NavLink>
+                <NavLink className={({ isActive }) => isActive ? "navLink active" : "navLink"} to="/spells">Catalogue</NavLink>
+                <NavLink className={({ isActive }) => isActive ? "navLink active" : "navLink"} to="/favourites">Favourites</NavLink>
                 <input
                     placeholder='for example "wish"'
                     className="accountInput"
@@ -112,7 +114,7 @@ function Navigation() {
                     >Logout
                     </button>
                     : <NavLink
-                        className="navLink-account"
+                        className={({ isActive }) => isActive ? "navLink-account active" : "navLink-account"}
                         to="/account"
                     >Login
                     </NavLink>}

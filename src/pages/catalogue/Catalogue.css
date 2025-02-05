@@ -47,6 +47,16 @@ select.suggestions-list {
     width: 100%;
     background-color: var(--lightparchment);
     margin-bottom: 30px;
+    text-align: center;
+}
+
+.catalogue-header {
+    color: var(--ink);
+    font-size: 24px;
+    list-style: none;
+    border-bottom: 1px solid var(--ink);
+    margin: 5px 0;
+    align-content: center;
 }
 
 

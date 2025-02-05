@@ -1,7 +1,7 @@
 import './CatalogueItem.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
     const [spellDetails, setSpellDetails] = useState({});
@@ -19,7 +19,9 @@ function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
                 });
                 setSpellDetails(response.data);
             } catch (e) {
-                console.error(e);
+                if (e.name !== "CanceledError") {
+                    console.error(e);
+                }
             } finally {
                 setLoading(false);
             }
@@ -39,7 +41,7 @@ function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
             const levelMatch = !isCategoryFiltered("level", filters) || filters.level[spellDetails.level] || false;
             const typeMatch = !isCategoryFiltered("type", filters) || filters.type[spellDetails?.damage?.damage_type?.name.toLowerCase()] || (filters.type.healing && Object.keys(spellDetails).includes("heal_at_slot_level")) || false;
             const classMatch = !isCategoryFiltered("classes", filters) || spellDetails.classes?.some(cls => filters.classes[cls.name.toLowerCase()]) || false;
-            const timeMatch = !isCategoryFiltered("castTime", filters) || (filters.castTime.action && spellDetails.casting_time === "1 action") || (filters.castTime["bonus action"] && spellDetails.casting_time === "1 bonus action") || (filters.castTime.timed && spellDetails.casting_time.includes("hour" || "minute" )) || false;
+            const timeMatch = !isCategoryFiltered("castTime", filters) || (filters.castTime.action && spellDetails.casting_time === "1 action") || (filters.castTime["bonus action"] && spellDetails.casting_time === "1 bonus action") || (filters.castTime.timed && (spellDetails.casting_time.includes("hour") || spellDetails.casting_time.includes("minute"))) || (filters.castTime["reaction"] && spellDetails.casting_time === "1 reaction")|| false;
             const attackMatch = !isCategoryFiltered("attack", filters) || filters.attack[spellDetails.attack_type] || false;
             const rangeMatch = !isCategoryFiltered("range", filters) || filters.range[spellDetails.range.toLowerCase()] || false;
             const dcTypeMatch = !isCategoryFiltered("dcType", filters) || filters.dcType[spellDetails?.dc?.dc_type?.index] || false;
@@ -61,26 +63,27 @@ function CatalogueItem({index, name, url, filters, handleSpellDetails}) {
     if (!isRendered) {
         return null;
     } else {
-    const classes = spellDetails.classes
-        ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
-        : " ";
-    const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || spellDetails?.heal_at_slot_level?.[spellDetails.level] || " ";
-    const damageType = spellDetails?.damage?.damage_type?.name || (spellDetails?.heal_at_slot_level ? "Healing" : " ") || " ";
-    const castTime = spellDetails.casting_time || " ";
-    const range = spellDetails.range || " ";
+        const classes = spellDetails.classes
+            ? spellDetails.classes.map((cls) => cls.name.slice(0, 3)).join(", ")
+            : " ";
+        const damage = spellDetails?.damage?.damage_at_slot_level?.[spellDetails.level] || spellDetails?.damage?.damage_at_character_level?.[1] || spellDetails?.heal_at_slot_level?.[spellDetails.level] || " ";
+        const damageType = spellDetails?.damage?.damage_type?.name || (spellDetails?.heal_at_slot_level ? "Healing" : " ") || " ";
+        const castTime = spellDetails.casting_time || " ";
+        const range = spellDetails.range || " ";
 
-    return (
-        <NavLink className="catalogueLink" to={`/spells/${index}`}>
-            <li className="catalogue-item" key={index}>
-                <p className="catalogue-name">{name}</p>
-                <p className="catalogue-classes">{classes}</p>
-                <p className="catalogue-damage">{damage}</p>
-                <p className="catalogue-type">{damageType}</p>
-                <p className="catalogue-cast">{castTime}</p>
-                <p className="catalogue-range">{range}</p>
-            </li>
-        </NavLink>
-    )}
+        return (
+            <Link className="catalogueLink" to={`/spells/${index}`}>
+                <li className="catalogue-item" key={index}>
+                    <p className="catalogue-name">{name}</p>
+                    <p className="catalogue-classes">{classes}</p>
+                    <p className="catalogue-damage">{damage}</p>
+                    <p className="catalogue-type">{damageType}</p>
+                    <p className="catalogue-cast">{castTime}</p>
+                    <p className="catalogue-range">{range}</p>
+                </li>
+            </Link>
+        )
+    }
 }
 
 export default CatalogueItem;
