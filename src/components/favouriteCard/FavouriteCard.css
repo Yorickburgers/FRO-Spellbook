@@ -1,6 +1,7 @@
 .favourite-card {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background-color: var(--parchment);
     color: var(--ink);
     padding: 24px;
@@ -8,6 +9,12 @@
     margin-bottom: 24px;
     border-radius: 20px;
     align-items: center;
+    height: 240px;
+}
+
+.spell-name {
+    height: 100%;
+    align-content: center;
 }
 
 .favourite-details {
