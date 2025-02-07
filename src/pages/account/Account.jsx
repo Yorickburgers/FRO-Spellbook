@@ -79,7 +79,7 @@ function Account() {
                     <form className="account-form" onSubmit={(e) => handleRegisterSubmit(e)}>
                         <label className="account-label" htmlFor="email">Email:
                             <input type="email" id="email" name="email" className="accountInput"
-                                   onChange={handleRegisterChange} value={registerInput.email} pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must contain an @-sign, and a domain" required={true}/>
+                                   onChange={handleRegisterChange} value={registerInput.email} pattern="[a-zA-Z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must contain an @-sign, and a domain" required={true}/>
                         </label>
                         <label className="account-label" htmlFor="register-username">Username:
                             <input type="text" id="register-username" name="username" className="accountInput"
